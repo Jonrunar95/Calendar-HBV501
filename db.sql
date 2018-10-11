@@ -1,7 +1,6 @@
 CREATE TABLE Users (
-  id SERIAL PRIMARY KEY,
   name VARCHAR(64),
-  email VARCHAR(64),
+  email VARCHAR(64) PRIMARY KEY,
   hash  VARCHAR(128)
 );
 
@@ -9,11 +8,11 @@ CREATE TABLE Event (
   id SERIAL PRIMARY KEY,
   startDate TIMESTAMP,
   endDate TIMESTAMP,
-  ownerID SERIAL NOT NULL,
+  owner VARCHAR(64) NOT NULL,
   title VARCHAR(64),
   comment TEXT,
 
-  FOREIGN KEY (ownerID) REFERENCES Users(id)
+  FOREIGN KEY (owner) REFERENCES Users(email)
 );
 
 CREATE TABLE Shared (
