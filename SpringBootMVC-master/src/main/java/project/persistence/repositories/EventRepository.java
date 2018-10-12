@@ -25,4 +25,8 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     void delete(Long id);
 
     List<Event> findAll();
+
+    @Query(value = "SELECT event from Event event " +
+            "where event.startDate > ?1 and event.endDate < ?2" )
+    List<Event> findPeriod(long start, long end);
 }
