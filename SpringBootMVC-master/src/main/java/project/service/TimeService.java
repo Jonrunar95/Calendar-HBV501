@@ -1,50 +1,40 @@
 package project.service;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TimeService{
-    private Date startDate;
-    private Date end;
-    private String startString;
-    private String endString;
-    public TimeService(Date start, Date end){
-        SimpleDateFormat form = new SimpleDateFormat ("dd.MM.yyyy 'kl' hh:mm:ss");
-        this.startString = form.format(start);
-        this.endString = form.format(end);
-        this.startDate = start;
-        this.end = end;
+    private Date date;
+    private String dateString;
+    public TimeService(Date date){
+        this.date = date;
+        SimpleDateFormat form = new SimpleDateFormat ("dd.MM.yyyy");
+        this.dateString = form.format(date);
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public TimeService(String date){
+        SimpleDateFormat form = new SimpleDateFormat ("dd.MM.yyyy");
+        try {
+            this.date = form.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+    public Date getDate() {
+        return date;
     }
 
-    public Date getEnd() {
-        return end;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
-    public void setEnd(Date end) {
-        this.end = end;
+    public String getDateString() {
+        return dateString;
     }
 
-    public String getStartString() {
-        return startString;
-    }
-
-    public void setStartString(String startString) {
-        this.startString = startString;
-    }
-
-    public String getEndString() {
-        return endString;
-    }
-
-    public void setEndString(String endString) {
-        this.endString = endString;
+    public void setDateString(String dateString) {
+        this.dateString = dateString;
     }
 }
