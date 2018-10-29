@@ -22,22 +22,4 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public List<Event> getall() {
-        return eventService.findAll();
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.POST)
-    public Event postEvent(@RequestBody Event event){
-
-        Event saved = eventService.save(event);
-
-        return saved;
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public void deleteEvent(@PathVariable Long id) {
-        eventService.delete(id);
-    }
-
 }

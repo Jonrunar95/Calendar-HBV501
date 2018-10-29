@@ -22,7 +22,7 @@ public class User {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "events"
+            mappedBy = "users"
     )
     private List<Event> events;
 
