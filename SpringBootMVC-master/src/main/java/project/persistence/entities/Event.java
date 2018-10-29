@@ -2,9 +2,10 @@ package project.persistence.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-@Table(name = "Event")
+@Table(name = "events")
 public class Event {
 
     @Id
@@ -15,18 +16,33 @@ public class Event {
     private Date endDate;
     private Long ownerID;
     private String title;
-    private String comment;
+    private String description;
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            }
+    )
+    @JoinTable(
+            name = "shared",
+            joinColumns = { @JoinColumn(name = "eventID")},
+            inverseJoinColumns = { @JoinColumn(name = "userID")}
+    )
+    private List<User> users;
+
 
     public Event() {
 
     }
 
-    public Event(Date startDate, Date endDate, Long ownerID, String title, String comment) {
+    public Event(Date startDate, Date endDate, Long ownerID, String title, String description) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.ownerID = ownerID;
         this.title = title;
-        this.comment = comment;
+        this.description = description;
     }
 
     public Long getId() {
@@ -69,11 +85,11 @@ public class Event {
         this.title = title;
     }
 
-    public String getComment() {
-        return comment;
+    public String getDescription() {
+        return description;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setDescription(String comment) {
+        this.description = description;
     }
 }
