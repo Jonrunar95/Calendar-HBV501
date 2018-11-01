@@ -2,6 +2,7 @@ package project.service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.persistence.entities.Event;
 import project.persistence.entities.User;
 import project.persistence.repositories.UserRepository;
 import project.service.UserService;
@@ -41,6 +42,12 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User login(User user) {
         return null;
+    }
+
+    @Override
+    public List<Event> findAllEvents(Long id) {
+        User user = userRepository.findOneById(id);
+        return user.getEvents();
     }
 
     @Override

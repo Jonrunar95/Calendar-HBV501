@@ -1,6 +1,7 @@
 package project.persistence.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import project.persistence.entities.Event;
 import project.persistence.entities.User;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     User findUserByUsername(String username);
 
     List<User> findAll();
+
+    User findOneById(Long id);
 }

@@ -64,8 +64,6 @@ public class EventServiceImplementation implements EventService {
 
         currentUserList.addAll(newUsers);
 
-        event.setUsers(currentUserList);
-
         return eventRepository.save(event);
 
     }

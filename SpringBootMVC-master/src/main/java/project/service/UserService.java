@@ -1,6 +1,7 @@
 package project.service;
 
 
+import project.persistence.entities.Event;
 import project.persistence.entities.User;
 
 import java.util.List;
@@ -18,4 +19,6 @@ public interface UserService {
     User login(User user);
 
     List<User> findAll();
+
+    List<Event> findAllEvents(Long id);
 }
