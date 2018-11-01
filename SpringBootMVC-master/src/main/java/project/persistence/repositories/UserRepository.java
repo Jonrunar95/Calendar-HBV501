@@ -11,5 +11,5 @@ import project.persistence.entities.User;
  *
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-
+    User getUser(String username);
 }

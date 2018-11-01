@@ -18,4 +18,6 @@ public interface EventService {
     Event findOne(Long id);
 
     Event updateEvent(Event event);
+
+    Event updateUserList(Event event, List<String> usernames);
 }

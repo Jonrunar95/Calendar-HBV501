@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
 import project.persistence.repositories.EventRepository;
+import project.persistence.repositories.UserRepository;
 import project.service.EventService;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,7 +16,8 @@ import java.util.List;
 public class EventServiceImplementation implements EventService {
 
     // Instance Variables
-    EventRepository repository;
+    EventRepository eventRepository;
+    UserRepository userRepository;
 
     // Dependency Injection
     @Autowired
@@ -24,7 +27,7 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event save(Event event) {
-        return repository.save(event);
+        return eventRepository.save(event);
     }
 
     @Override
@@ -34,7 +37,7 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public List<Event> findByDate(Date startDate, Date endDate) {
-        return repository.findByStartDateBetween(startDate, endDate);
+        return eventRepository.findByStartDateBetween(startDate, endDate);
     }
 
     @Override
@@ -45,5 +48,24 @@ public class EventServiceImplementation implements EventService {
     @Override
     public Event updateEvent(Event event) {
         return null;
+    }
+
+    @Override
+    public Event updateUserList(Event event, List<String> usernames) {
+        List <User> currentUserList = event.getUsers();
+        List <User> newUsers = new ArrayList<>();
+
+        for (String username : usernames) {
+            User user = userRepository.getUser(username);
+            if (user != null) newUsers.add(user);
+        }
+
+        currentUserList.addAll(newUsers);
+
+        event.setUsers(currentUserList);
+
+        return eventRepository.update(event);
+
+
     }
 }

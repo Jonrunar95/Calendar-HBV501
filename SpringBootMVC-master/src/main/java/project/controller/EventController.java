@@ -13,7 +13,7 @@ import java.util.List;
  * in your project
  */
 @RestController
-@RequestMapping("/event")
+@RequestMapping("/")
 public class EventController {
 
     private final EventService eventService;
@@ -23,12 +23,15 @@ public class EventController {
         this.eventService = eventService;
     }
 
-    @RequestMapping(path="/", method=RequestMethod.GET)
-    public List<Event> postEvent(@RequestParam Date startDate, Date endDate) {
-        return eventService.findByDate(startDate, endDate);
+    @RequestMapping(path="/event", method=RequestMethod.GET)
+    public List<Event> postEvent(@RequestParam String startDate, String endDate) {
+        return eventService.findByDate(
+                new Date(Integer.parseInt(startDate)),
+                new Date(Integer.parseInt(endDate))
+        );
     }
 
-    @RequestMapping(path="/", method=RequestMethod.POST)
+    @RequestMapping(path="/event", method=RequestMethod.POST)
     public Event postEvent(@RequestBody Event event) {
         return eventService.save(event);
     }

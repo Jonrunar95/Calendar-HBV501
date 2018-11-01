@@ -18,14 +18,6 @@ public class Event {
     private String title;
     private String description;
 
-    public List<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = CascadeType.ALL
@@ -97,5 +89,13 @@ public class Event {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }
