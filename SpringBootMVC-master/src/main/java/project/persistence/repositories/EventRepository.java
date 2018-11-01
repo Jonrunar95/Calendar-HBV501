@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 import project.persistence.entities.Event;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,5 +17,7 @@ import java.util.List;
  *
  */
 public interface EventRepository extends JpaRepository<Event, Long> {
+    Event save(Event event);
 
+    List<Event> findByStartDateBetween(Date startDate, Date endDate);
 }

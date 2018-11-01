@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.Event;
 import project.service.EventService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +21,16 @@ public class EventController {
     @Autowired
     public EventController(EventService eventService) {
         this.eventService = eventService;
+    }
+
+    @RequestMapping(path="/", method=RequestMethod.GET)
+    public List<Event> postEvent(@RequestParam Date startDate, Date endDate) {
+        return eventService.findByDate(startDate, endDate);
+    }
+
+    @RequestMapping(path="/", method=RequestMethod.POST)
+    public Event postEvent(@RequestBody Event event) {
+        return eventService.save(event);
     }
 
 }

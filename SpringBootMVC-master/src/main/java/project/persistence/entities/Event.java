@@ -18,12 +18,18 @@ public class Event {
     private String title;
     private String description;
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
     @ManyToMany(
             fetch = FetchType.LAZY,
-            cascade = {
-                    CascadeType.PERSIST,
-                    CascadeType.MERGE
-            }
+            cascade = CascadeType.ALL
+
     )
     @JoinTable(
             name = "shared",
@@ -89,7 +95,7 @@ public class Event {
         return description;
     }
 
-    public void setDescription(String comment) {
+    public void setDescription(String description) {
         this.description = description;
     }
 }

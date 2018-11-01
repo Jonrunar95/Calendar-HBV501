@@ -9,11 +9,11 @@ import java.util.List;
 
 public interface EventService {
 
-    Event save(User user, Event event);
+    Event save(Event event);
 
     void delete(Event event);
 
-    List <Event> findByDate(User user, Date startDate, Date endDate);
+    List <Event> findByDate(Date startDate, Date endDate);
 
     Event findOne(Long id);
 

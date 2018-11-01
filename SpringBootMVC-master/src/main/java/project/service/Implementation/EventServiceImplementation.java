@@ -23,8 +23,8 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event save(User user, Event event) {
-        return null;
+    public Event save(Event event) {
+        return repository.save(event);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public List<Event> findByDate(User user, Date startDate, Date endDate) {
-        return null;
+    public List<Event> findByDate(Date startDate, Date endDate) {
+        return repository.findByStartDateBetween(startDate, endDate);
     }
 
     @Override
