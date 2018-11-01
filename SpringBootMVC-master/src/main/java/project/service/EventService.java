@@ -2,7 +2,6 @@ package project.service;
 
 
 import project.persistence.entities.Event;
-import project.persistence.entities.User;
 
 import java.util.Date;
 import java.util.List;
@@ -19,5 +18,5 @@ public interface EventService {
 
     Event updateEvent(Event event);
 
-    Event updateUserList(Event event, List<String> usernames);
+    Event updateUserList(Long id, List<String> usernames);
 }

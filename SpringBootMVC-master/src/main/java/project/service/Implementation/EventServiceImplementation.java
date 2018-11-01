@@ -21,8 +21,9 @@ public class EventServiceImplementation implements EventService {
 
     // Dependency Injection
     @Autowired
-    public EventServiceImplementation(EventRepository repository) {
-        this.repository = repository;
+    public EventServiceImplementation(EventRepository eventRepository, UserRepository userRepository) {
+        this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -32,7 +33,7 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public void delete(Event event) {
-
+        eventRepository.delete(event);
     }
 
     @Override
@@ -42,21 +43,22 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event findOne(Long id) {
-        return null;
+        return eventRepository.findOneById(id);
     }
 
     @Override
     public Event updateEvent(Event event) {
-        return null;
+        return eventRepository.save(event);
     }
 
     @Override
-    public Event updateUserList(Event event, List<String> usernames) {
+    public Event updateUserList(Long id, List<String> usernames) {
+        Event event = eventRepository.findOneById(id);
         List <User> currentUserList = event.getUsers();
         List <User> newUsers = new ArrayList<>();
 
         for (String username : usernames) {
-            User user = userRepository.getUser(username);
+            User user = userRepository.findUserByUsername(username);
             if (user != null) newUsers.add(user);
         }
 
@@ -64,8 +66,7 @@ public class EventServiceImplementation implements EventService {
 
         event.setUsers(currentUserList);
 
-        return eventRepository.update(event);
-
+        return eventRepository.save(event);
 
     }
 }

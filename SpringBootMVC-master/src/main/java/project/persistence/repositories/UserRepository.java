@@ -3,6 +3,8 @@ package project.persistence.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import project.persistence.entities.User;
 
+import java.util.List;
+
 /**
  * By extending the {@link JpaRepository} we have access to powerful methods.
  * For detailed information, see:
@@ -11,5 +13,8 @@ import project.persistence.entities.User;
  *
  */
 public interface UserRepository extends JpaRepository<User, Long> {
-    User getUser(String username);
+
+    User findUserByUsername(String username);
+
+    List<User> findAll();
 }

@@ -21,5 +21,7 @@ public interface EventRepository extends JpaRepository<Event, Long> {
 
     List<Event> findByStartDateBetween(Date startDate, Date endDate);
 
-    Event update(Event event);
+    Event findOneById(Long id);
+
+    void delete(Event event);
 }
