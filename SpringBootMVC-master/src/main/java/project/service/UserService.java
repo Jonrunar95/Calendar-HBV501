@@ -20,5 +20,4 @@ public interface UserService {
 
     List<User> findAll();
 
-    List<Event> findAllEvents(Long id);
 }

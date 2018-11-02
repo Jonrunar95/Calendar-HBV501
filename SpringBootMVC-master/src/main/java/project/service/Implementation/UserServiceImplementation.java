@@ -26,7 +26,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void delete(User user) {
-
+        userRepository.delete(user);
     }
 
     @Override
@@ -36,16 +36,11 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User update(User user) {
-        return null;
+        return cleanUser(user);
     }
 
     @Override
     public User login(User user) {
-        return null;
-    }
-
-    @Override
-    public List<Event> findAllEvents(Long id) {
         return null;
     }
 

@@ -44,8 +44,7 @@ public class EventController {
 
     @RequestMapping(path="/event/{id}", method=RequestMethod.POST)
     public Event updateUserList(@RequestBody List<String> usernames, @PathVariable String id) {
-        Event event = eventService.updateUserList(Long.parseLong(id), usernames);
-        return event;
+        return eventService.updateUserList(Long.parseLong(id), usernames);
     }
 
 }
