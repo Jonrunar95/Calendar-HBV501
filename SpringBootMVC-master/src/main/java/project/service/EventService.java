@@ -12,7 +12,7 @@ public interface EventService {
 
     void delete(Event event);
 
-    List <Event> findByDate(Date startDate, Date endDate);
+    List<Event> findByDate(Date startDate, Date endDate);
 
     Event findOne(Long id);
 

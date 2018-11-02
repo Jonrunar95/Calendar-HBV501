@@ -33,6 +33,11 @@ public class UserController {
         return userService.findAll();
     }
 
+    @RequestMapping(path="/user/{id}", method=RequestMethod.GET)
+    public User findOneUser(@PathVariable String id) {
+        return userService.findOne(Long.parseLong(id));
+    }
+
     @RequestMapping(path="/user/{id}/events", method=RequestMethod.GET)
     public List<Event> getAllEvents(@PathVariable String id) {
         return userService.findAllEvents(Long.parseLong(id));

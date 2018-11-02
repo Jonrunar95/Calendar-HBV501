@@ -21,7 +21,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User save(User user) {
-        return userRepository.save(user);
+        return cleanUser(userRepository.save(user));
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User findOne(Long id) {
-        return null;
+        return cleanUser(userRepository.findOneById(id));
     }
 
     @Override
@@ -46,12 +46,26 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public List<Event> findAllEvents(Long id) {
-        User user = userRepository.findOneById(id);
-        return user.getEvents();
+        return null;
     }
 
     @Override
     public List<User> findAll() {
-        return userRepository.findAll();
+        return cleanUserList(userRepository.findAll());
+    }
+
+    private User cleanUser(User user) {
+        if (user.getEvents() == null) return user;
+        for (Event event : user.getEvents()) {
+            event.setUsers(null);
+        }
+        return user;
+    }
+
+    private List<User> cleanUserList(List<User> userList) {
+        for (User user : userList) {
+            user = cleanUser(user);
+        }
+        return userList;
     }
 }

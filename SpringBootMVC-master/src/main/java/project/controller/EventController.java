@@ -32,6 +32,11 @@ public class EventController {
         );
     }
 
+    @RequestMapping(path="/event/{id}", method=RequestMethod.GET)
+    public Event findOneEvent(@PathVariable String id) {
+        return eventService.findOne(Long.parseLong(id));
+    }
+
     @RequestMapping(path="/event", method=RequestMethod.POST)
     public Event postEvent(@RequestBody Event event) {
         return eventService.save(event);
@@ -39,7 +44,8 @@ public class EventController {
 
     @RequestMapping(path="/event/{id}", method=RequestMethod.POST)
     public Event updateUserList(@RequestBody List<String> usernames, @PathVariable String id) {
-        return eventService.updateUserList(Long.parseLong(id), usernames);
+        Event event = eventService.updateUserList(Long.parseLong(id), usernames);
+        return event;
     }
 
 }

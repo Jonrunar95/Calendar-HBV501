@@ -17,6 +17,7 @@ import java.util.List;
  *
  */
 public interface EventRepository extends JpaRepository<Event, Long> {
+
     Event save(Event event);
 
     List<Event> findByStartDateBetween(Date startDate, Date endDate);

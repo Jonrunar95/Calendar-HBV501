@@ -28,7 +28,7 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event save(Event event) {
-        return eventRepository.save(event);
+        return cleanEvent(eventRepository.save(event));
     }
 
     @Override
@@ -38,12 +38,12 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public List<Event> findByDate(Date startDate, Date endDate) {
-        return eventRepository.findByStartDateBetween(startDate, endDate);
+        return cleanEventList(eventRepository.findByStartDateBetween(startDate, endDate));
     }
 
     @Override
     public Event findOne(Long id) {
-        return eventRepository.findOneById(id);
+        return cleanEvent(eventRepository.findOneById(id));
     }
 
     @Override
@@ -53,18 +53,46 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event updateUserList(Long id, List<String> usernames) {
+        // Get event with id
         Event event = eventRepository.findOneById(id);
+
+        // Get current userList
         List <User> currentUserList = event.getUsers();
+
+
         List <User> newUsers = new ArrayList<>();
 
+        // Validate each user and add to List
         for (String username : usernames) {
             User user = userRepository.findUserByUsername(username);
             if (user != null) newUsers.add(user);
         }
 
+        // Add new users to event list
         currentUserList.addAll(newUsers);
 
-        return eventRepository.save(event);
+        // eventRepository removes duplicate users
+        event = eventRepository.save(event);
 
+        // Clean event object
+        return cleanEvent(event);
+
+    }
+
+    // set events for each user as null to prevent infinite recursive
+    // definitions
+    private Event cleanEvent(Event event) {
+        if (event.getUsers() == null) return event;
+        for (User user: event.getUsers()) {
+            user.setEvents(null);
+        }
+        return event;
+    }
+
+    private List<Event> cleanEventList(List<Event> eventList) {
+        for (Event event : eventList) {
+            event = cleanEvent(event);
+        }
+        return eventList;
     }
 }
