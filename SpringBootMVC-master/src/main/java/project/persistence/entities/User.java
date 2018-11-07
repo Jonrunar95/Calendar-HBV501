@@ -83,4 +83,8 @@ public class User {
         this.events = events;
     }
 
+    public boolean equals(User user) {
+        return user.getId() == this.id;
+    }
+
 }
