@@ -29,7 +29,7 @@ public class EventController {
     // Returns list of events with startDate between x and y
     @CrossOrigin(origins = "*")
     @RequestMapping(path="/event", method=RequestMethod.GET)
-    public List<Event> postEvent(@RequestParam String startDate, String endDate) {
+    public List<Event> getEvents(@RequestParam String startDate, String endDate) {
         return eventService.findByDate(
                 new Date(Long.parseLong(startDate)),
                 new Date(Long.parseLong(endDate))

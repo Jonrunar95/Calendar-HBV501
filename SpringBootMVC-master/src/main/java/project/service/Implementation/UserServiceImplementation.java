@@ -51,6 +51,9 @@ public class UserServiceImplementation implements UserService {
 
     private User cleanUser(User user) {
         if (user.getEvents() == null) return user;
+
+        user.setHash(null);
+
         for (Event event : user.getEvents()) {
             event.setUsers(null);
         }

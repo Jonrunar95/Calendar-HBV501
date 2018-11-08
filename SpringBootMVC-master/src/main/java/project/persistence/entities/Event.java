@@ -1,5 +1,8 @@
 package project.persistence.entities;
 
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -25,8 +28,11 @@ public class Event {
     )
     @JoinTable(
             name = "shared",
-            joinColumns = { @JoinColumn(name = "eventID")},
-            inverseJoinColumns = { @JoinColumn(name = "userID")}
+            joinColumns = { @JoinColumn(name = "eventID", referencedColumnName = "id")},
+            inverseJoinColumns = { @JoinColumn(name = "userID", referencedColumnName = "id")},
+            uniqueConstraints = {
+                    @UniqueConstraint(columnNames = {"eventID", "userID"})
+            }
     )
     private List<User> users;
 
@@ -97,5 +103,9 @@ public class Event {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public boolean equals(Event event) {
+        return event.getId() == this.id;
     }
 }
