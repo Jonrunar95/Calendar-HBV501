@@ -1,7 +1,6 @@
 package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import project.persistence.entities.User;
 import project.service.UserService;
@@ -29,8 +28,13 @@ public class UserController {
     // Returns user with new ID
     @CrossOrigin(origins = "*")
     @RequestMapping(path="/user", method=RequestMethod.POST)
-    public User registerUser(@RequestBody User user) {
-        return userService.save(user);
+    public User registerUser(@RequestBody User user) throws InvalidUsernameException {
+        try {
+            return userService.save(user);
+        } catch (Exception e) {
+            throw new InvalidUsernameException("Username taken");
+        }
+
     }
 
     // Example: GET localhost:8080/user
