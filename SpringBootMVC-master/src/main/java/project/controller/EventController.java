@@ -31,8 +31,8 @@ public class EventController {
     @RequestMapping(path="/event", method=RequestMethod.GET)
     public List<Event> postEvent(@RequestParam String startDate, String endDate) {
         return eventService.findByDate(
-                new Date(Integer.parseInt(startDate)),
-                new Date(Integer.parseInt(endDate))
+                new Date(Long.parseLong(startDate)),
+                new Date(Long.parseLong(endDate))
         );
     }
 
