@@ -60,20 +60,22 @@ public class EventServiceImplementation implements EventService {
         List <User> currentUserList = event.getUsers();
 
 
-        List <User> newUsers = new ArrayList<>();
-
         // Validate each user and add to List
         for (String username : usernames) {
             User user = userRepository.findUserByUsername(username);
-            if (user != null) newUsers.add(user);
+            if (user != null && !currentUserList.contains(user)) {
+                currentUserList.add(user);
+            }
         }
 
-        // Add new users to event list
-        currentUserList.addAll(newUsers);
 
-        // eventRepository removes duplicate users
-        event = eventRepository.save(event);
 
+        try {
+            // eventRepository removes duplicate users
+            event = eventRepository.save(event);
+        } catch (Exception e){
+
+        }
         // Clean event object
         return cleanEvent(event);
 
