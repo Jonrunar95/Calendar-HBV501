@@ -47,8 +47,18 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event updateEvent(Event event) {
-        return eventRepository.save(event);
+    public Event updateEvent(Long id, Event event) {
+
+        // Find the event being updated
+        Event currentEvent = eventRepository.findOneById(id);
+
+        // Only update available fields.
+        if (event.getStartDate() != null) currentEvent.setStartDate(event.getStartDate());
+        if (event.getEndDate() != null) currentEvent.setEndDate(event.getEndDate());
+        if (event.getTitle() != null) currentEvent.setTitle(event.getTitle());
+        if (event.getDescription() != null) currentEvent.setDescription(event.getDescription());
+
+        return cleanEvent(eventRepository.save(currentEvent));
     }
 
     @Override

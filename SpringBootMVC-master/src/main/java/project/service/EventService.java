@@ -16,7 +16,7 @@ public interface EventService {
 
     Event findOne(Long id);
 
-    Event updateEvent(Event event);
+    Event updateEvent(Long id, Event event);
 
     Event updateUserList(Long id, List<String> usernames);
 }

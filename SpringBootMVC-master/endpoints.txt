@@ -1,0 +1,36 @@
+// Example: GET localhost:8080/event?StartDate={x}&endDate={y}
+// x, y are dates in milliseconds
+// Returns list of events with startDate between x and y
+
+// Example: GET localhost:8080/event/{id}
+// id is eventID
+// Returns corresponding event
+
+// Example: POST localhost:8080/event
+// RequestBody: { startDate, endDate, ownerID, title, description }
+// startDate and endDate are dates in milliseconds
+// ownerID is id of the creator of the event
+// title and description are strings
+// Returns event with new ID
+
+// Example: POST localhost:8080/event/{id}/users
+// RequestBody: [username_1, username_2, ... , username_k]
+// id is eventID
+// Returns event with updated UserList based on valid usernames given in request body
+
+// Example: POST localhost:8080/event/{id}
+// RequestBody: { startDate, endDate, title, description }
+// id is eventID, all params are optional in request body
+// Returns event with updated fields
+
+// Example: POST localhost:8080/user
+// RequestBody: { name, username, hash }
+// name, username and hash are strings.  username is unique.
+// Returns user with new ID
+
+// Example: GET localhost:8080/user
+// Returns list of all users
+// Example: GET localhost:8080/user/{id}
+// id is userID
+// Returns corresponding user, users eventList is in response.
+

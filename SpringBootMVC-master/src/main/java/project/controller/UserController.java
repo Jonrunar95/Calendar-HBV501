@@ -40,7 +40,6 @@ public class UserController {
                             "nested exception is org.hibernate.exception.ConstraintViolationException: " +
                             "could not execute statement")) {
                 throw new BadRequestException("Username is already taken");
-
             } else {
                 throw e;
             }
