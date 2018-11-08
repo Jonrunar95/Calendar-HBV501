@@ -2,6 +2,7 @@ package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import project.controller.exceptions.BadRequestException;
 import project.persistence.entities.User;
 import project.service.UserService;
 
@@ -28,11 +29,21 @@ public class UserController {
     // Returns user with new ID
     @CrossOrigin(origins = "*")
     @RequestMapping(path="/user", method=RequestMethod.POST)
-    public User registerUser(@RequestBody User user) throws InvalidUsernameException {
+    public User registerUser(@RequestBody User user) throws BadRequestException {
         try {
             return userService.save(user);
         } catch (Exception e) {
-            throw new InvalidUsernameException("Username taken");
+            // If error message matches username taken message, throw bad request exception
+            if (e.getMessage().equals(
+                    "could not execute statement; " +
+                            "SQL [n/a]; constraint [uk_r43af9ap4edm43mmtq01oddj6]; " +
+                            "nested exception is org.hibernate.exception.ConstraintViolationException: " +
+                            "could not execute statement")) {
+                throw new BadRequestException("Username is already taken");
+
+            } else {
+                throw e;
+            }
         }
 
     }
