@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-class Calendar extends Component {
+class Users extends Component {
 
   constructor(props) {
     super(props);
     this.state = { 
-      startDate: 0,
-      endDate: 0,
       data: null, 
       loading: true, 
       error: false,
@@ -17,7 +15,6 @@ class Calendar extends Component {
   async componentDidMount() {
     try {
       const data = await this.fetchData();
-      console.log(data)
       this.setState({ data, loading: false });
     } catch (error) {
       console.error('Error fetching data', error);
@@ -26,22 +23,17 @@ class Calendar extends Component {
   }
 
   async fetchData () {
-    const startDate = new Date().getTime() - 604800000
-    const endDate = new Date().getTime() + 604800000;
-    const url = 'http://localhost:8080/event?startDate=' + startDate + '&endDate=' + endDate;
-    console.log(url)
-    const response = await fetch(url)
+    const response = await fetch('http://localhost:8080/user')
     const data = await response.json();
     return data;
   }
 
   getEvents(data) {
-    const cat = 
-    data.map((event) => 
+    const cat = data.map((user) => 
       <div>
-        <p>{event.title}</p>
+        <p>{user.username}</p>
       </div>
-      );
+    )
     return cat;
   }
 
@@ -65,4 +57,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default Users;

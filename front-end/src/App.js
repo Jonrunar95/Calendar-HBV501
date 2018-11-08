@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import './App.css';
 import Home from './routes/home';
 import Calendar from './routes/calendar';
+import Users from './routes/users'
 
 class App extends Component {
   render() {
@@ -16,6 +17,8 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route exact path="/Calendar" component={Calendar} />
+                <Route exact path="/Users" component={Users} />
+                
               </Switch>
             </BrowserRouter>
           </section>
