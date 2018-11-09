@@ -1,4 +1,4 @@
-// Example: GET localhost:8080/event?StartDate={x}&endDate={y}
+// Example: GET localhost:8080/event?startDate={x}&endDate={y}
 // x, y are dates in milliseconds
 // Returns list of events with startDate between x and y
 
@@ -11,6 +11,7 @@
 // startDate and endDate are dates in milliseconds
 // ownerID is id of the creator of the event
 // title and description are strings
+// description is optional
 // Returns event with new ID
 
 // Example: POST localhost:8080/event/{id}/users
