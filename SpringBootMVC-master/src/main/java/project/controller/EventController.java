@@ -3,6 +3,7 @@ package project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.controller.exceptions.BadRequestException;
+import project.controller.exceptions.NotFoundException;
 import project.persistence.entities.Event;
 import project.service.EventService;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * in your project
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/event")
 public class EventController {
 
     private final EventService eventService;
@@ -29,7 +30,7 @@ public class EventController {
     // x, y are dates in milliseconds
     // Returns list of events with startDate between x and y
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/event", method=RequestMethod.GET)
+    @RequestMapping(path="", method=RequestMethod.GET)
     public List<Event> getEvents(@RequestParam String startDate, String endDate) {
         return eventService.findByDate(
                 new Date(Long.parseLong(startDate)),
@@ -41,9 +42,14 @@ public class EventController {
     // id is eventID
     // Returns corresponding event
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/event/{id}", method=RequestMethod.GET)
-    public Event findOneEvent(@PathVariable String id) {
-        return eventService.findOne(Long.parseLong(id));
+    @RequestMapping(path="/{id}", method=RequestMethod.GET)
+    public Event findOneEvent(@PathVariable String id) throws NotFoundException {
+        Event event = eventService.findOne(Long.parseLong(id));
+        if (event == null) {
+            throw new NotFoundException("Event with id: " + id + " not found");
+        }
+
+        return event;
     }
 
     // Example: POST localhost:8080/event
@@ -53,7 +59,7 @@ public class EventController {
     // title and description are strings
     // Returns event with new ID
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/event", method=RequestMethod.POST)
+    @RequestMapping(path="", method=RequestMethod.POST)
     public Event postEvent(@RequestBody Event event) throws BadRequestException {
         try {
             return eventService.save(event);
@@ -74,9 +80,14 @@ public class EventController {
     // id is eventID
     // Returns event with updated UserList based on valid usernames given in request body
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/event/{id}/users", method=RequestMethod.POST)
-    public Event updateUserList(@RequestBody List<String> usernames, @PathVariable String id) {
-        return eventService.updateUserList(Long.parseLong(id), usernames);
+    @RequestMapping(path="/{id}/users", method=RequestMethod.POST)
+    public Event updateUserList(@RequestBody List<String> usernames, @PathVariable String id) throws NotFoundException {
+        Event event = eventService.updateUserList(Long.parseLong(id), usernames);
+        if (event == null) {
+            throw new NotFoundException("Event with id: " + id + " not found");
+        }
+
+        return event;
     }
 
 
@@ -85,9 +96,14 @@ public class EventController {
     // id is eventID, all params are optional in request body
     // Returns event with updated fields
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/event/{id}", method=RequestMethod.POST)
-    public Event updateUserList(@RequestBody Event event, @PathVariable String id) {
-        return eventService.updateEvent(Long.parseLong(id), event);
+    @RequestMapping(path="/{id}", method=RequestMethod.POST)
+    public Event updateUserList(@RequestBody Event event, @PathVariable String id) throws NotFoundException {
+        Event other = eventService.updateEvent(Long.parseLong(id), event);
+        if (other == null) {
+            throw new NotFoundException("Event with id: " + id + " not found");
+        }
+
+        return other;
     }
 
 }

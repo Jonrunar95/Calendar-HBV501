@@ -23,14 +23,14 @@
 // id is eventID, all params are optional in request body
 // Returns event with updated fields
 
-// Example: POST localhost:8080/user
+// Example: POST localhost:8080/users
 // RequestBody: { name, username, hash }
 // name, username and hash are strings.  username is unique.
 // Returns user with new ID
 
-// Example: GET localhost:8080/user
+// Example: GET localhost:8080/users
 // Returns list of all users
-// Example: GET localhost:8080/user/{id}
+// Example: GET localhost:8080/users/{id}
 // id is userID
 // Returns corresponding user, users eventList is in response.
 

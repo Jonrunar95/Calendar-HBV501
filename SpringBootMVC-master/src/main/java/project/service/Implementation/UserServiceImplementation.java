@@ -50,6 +50,7 @@ public class UserServiceImplementation implements UserService {
     }
 
     private User cleanUser(User user) {
+        if (user == null) return null;
         if (user.getEvents() == null) return user;
 
         user.setPassword(null);

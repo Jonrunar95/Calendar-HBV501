@@ -52,6 +52,8 @@ public class EventServiceImplementation implements EventService {
         // Find the event being updated
         Event currentEvent = eventRepository.findOneById(id);
 
+        if (event == null) return null;
+
         // Only update available fields.
         if (event.getStartDate() != null) currentEvent.setStartDate(event.getStartDate());
         if (event.getEndDate() != null) currentEvent.setEndDate(event.getEndDate());
@@ -65,6 +67,8 @@ public class EventServiceImplementation implements EventService {
     public Event updateUserList(Long id, List<String> usernames) {
         // Get event with id
         Event event = eventRepository.findOneById(id);
+
+        if (event == null) return null;
 
         // Get current userList
         List <User> currentUserList = event.getUsers();
@@ -94,6 +98,7 @@ public class EventServiceImplementation implements EventService {
     // set events for each user as null to prevent infinite recursive
     // definitions
     private Event cleanEvent(Event event) {
+        if (event == null) return null;
         if (event.getUsers() == null) return event;
         for (User user: event.getUsers()) {
             user.setEvents(null);
