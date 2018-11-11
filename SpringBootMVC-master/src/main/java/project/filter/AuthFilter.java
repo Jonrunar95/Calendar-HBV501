@@ -1,6 +1,5 @@
-/*
-
 package project.filter;
+
 import java.io.IOException;
 
 import javax.servlet.Filter;
@@ -66,5 +65,3 @@ public class AuthFilter implements Filter {
         if (user == null) throw new UnauthorizedException("Invalid token");
     }
 }
-
-*/

@@ -71,6 +71,14 @@ public class UserServiceImplementation implements UserService {
         return user;
     }
 
+    @Override
+    public User findByToken(String token) {
+        String sub = token.substring(7);
+
+        User user = userRepository.findByToken(sub);
+        return user;
+    }
+
     private List<User> cleanUserList(List<User> userList) {
         for (User user : userList) {
             user = cleanUser(user);

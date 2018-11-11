@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.*;
 import project.controller.exceptions.BadRequestException;
 import project.controller.exceptions.NotFoundException;
 import project.persistence.entities.Event;
+import project.persistence.entities.User;
 import project.service.EventService;
+import project.service.UserService;
 
 import java.nio.file.Path;
 import java.util.Date;
@@ -20,10 +22,12 @@ import java.util.List;
 public class EventController {
 
     private final EventService eventService;
+    private final UserService userService;
 
     @Autowired
-    public EventController(EventService eventService) {
+    public EventController(EventService eventService, UserService userService) {
         this.eventService = eventService;
+        this.userService = userService;
     }
 
     // Example: GET localhost:8080/event?StartDate={x}&endDate={y}
@@ -60,9 +64,10 @@ public class EventController {
     // Returns event with new ID
     @CrossOrigin(origins = "*")
     @RequestMapping(path="", method=RequestMethod.POST)
-    public Event postEvent(@RequestBody Event event) throws BadRequestException {
+    public Event postEvent(@RequestBody Event event, @RequestHeader(value="Authorization") String token) throws BadRequestException {
+        User user = userService.findByToken(token);
         try {
-            return eventService.save(event);
+            return eventService.save(user, event);
         } catch (Exception e) {
             if (e.getMessage().equals(
                     "could not execute statement; SQL [n/a]; " +

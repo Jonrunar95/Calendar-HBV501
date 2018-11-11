@@ -27,7 +27,10 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event save(Event event) {
+    public Event save(User user, Event event) {
+        event.setUsers(new ArrayList<>());
+        event.getUsers().add(user);
+
         return cleanEvent(eventRepository.save(event));
     }
 
