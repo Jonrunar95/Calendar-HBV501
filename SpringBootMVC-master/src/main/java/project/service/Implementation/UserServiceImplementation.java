@@ -41,7 +41,17 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User login(User user) {
-        return null;
+        User byUsername = userRepository.findUserByUsername(user.getUsername());
+
+        if (byUsername == null) return null;
+
+        if (!user.getPassword().equals(byUsername.getPassword())) return null;
+
+        String token = Long.toHexString(Double.doubleToLongBits(Math.random()));
+
+        byUsername.setToken(token);
+
+        return cleanUser(userRepository.save(byUsername));
     }
 
     @Override
