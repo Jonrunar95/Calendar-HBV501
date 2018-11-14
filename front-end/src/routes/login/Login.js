@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../api';
 //import bcrypt from 'Bcrypt'
 
 class Login extends Component {
@@ -8,7 +9,7 @@ class Login extends Component {
       username: '',
       password: '',
     };
-  
+
     this.changeUsername = this.changeUsername.bind(this);
     this.changePassword = this.changePassword.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,9 +23,9 @@ class Login extends Component {
     this.setState({password: event.target.value});
   }
 
-  
-  handleSubmit(event) {
-    
+
+  async handleSubmit(event) {
+    event.preventDefault();
     const {
       username,
       password,
@@ -32,23 +33,27 @@ class Login extends Component {
 
     const data = {
       username,
-      hash: password
+      password,
     }
 
-    fetch('http://localhost:8080/login', {
-      method: 'Post',
-      body: JSON.stringify(data)
-    })
-    .then((response) => {
-      alert('User has been added')
-      console.log(response)
-      //this.props.history.push('/books');
-    })
-    .catch((err) => {
-      if (err.response) {
-        alert(err.response.data.error);
-      }
-    });
+    const response = await api.post('/login', data);
+
+    console.log(response);
+
+    // fetch('http://localhost:8080/login', {
+    //   method: 'Post',
+    //   body: JSON.stringify(data)
+    // })
+    // .then((response) => {
+    //   alert('User has been added')
+    //   console.log(response)
+    //   //this.props.history.push('/books');
+    // })
+    // .catch((err) => {
+    //   if (err.response) {
+    //     alert(err.response.data.error);
+    //   }
+    // });
 
   }
 
@@ -68,19 +73,19 @@ class Login extends Component {
             <label  className="book_edit_label">
               <div>
                 Username:
-              </div> 
+              </div>
               <div>
                 <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
-              </div>                
+              </div>
             </label>
           </div>
           <div className="margin_div">
-            <label> 
+            <label>
               <div>
-                Password:  
+                Password:
               </div>
               <div>
-                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/> 
+                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
               </div>
             </label>
           </div>

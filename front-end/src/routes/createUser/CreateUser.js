@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../api.js';
 
 class CreateUser extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class CreateUser extends Component {
     this.setState({password2: event.target.value});
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const {
       username,
@@ -51,23 +52,27 @@ class CreateUser extends Component {
     const data = {
       name,
       username,
-      hash: password
-    }
+      password,
+    };
 
-    fetch('http://localhost:8080/register', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    })
-    .then((response) => {
-      alert('User has been added')
-      console.log(response)
-      //this.props.history.push('/books');
-    })
-    .catch((err) => {
-      if (err.response) {
-        alert(err.response.data.error);
-      }
-    });
+    const response = await api.post('/register', data);
+
+    console.log(response);
+
+    // fetch('http://localhost:8080/register', {
+    //   method: 'POST',
+    //   body: JSON.stringify(data)
+    // })
+    // .then((response) => {
+    //   alert('User has been added')
+    //   console.log(response)
+    //   //this.props.history.push('/books');
+    // })
+    // .catch((err) => {
+    //   if (err.response) {
+    //     alert(err.response.data.error);
+    //   }
+    // });
 
     }
   }
