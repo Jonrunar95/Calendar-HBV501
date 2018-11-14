@@ -38,7 +38,7 @@ class Calendar extends Component {
   getEvents(data) {
     const cat = 
     data.map((event) => 
-      <div>
+      <div key={event.id}>
         <p>{event.title}</p>
       </div>
       );

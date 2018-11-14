@@ -22,12 +22,11 @@ class Home extends Component {
     return (
         <div className='Buttons'>
           <div className='Button'>
-            <Link to='/users'> Create user </Link>
+            <Link to='/users'> Users </Link>
           </div>
-          <div className='Button'>
-            <Link to='/login'> Login </Link>
+          <div>
+            <Link to='/register'> Register</Link>
           </div>
-          <Link to='/calendar'> Calendar </Link>
         </div>
     );
   }
