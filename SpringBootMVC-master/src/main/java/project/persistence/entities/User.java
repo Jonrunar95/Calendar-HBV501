@@ -14,9 +14,14 @@ public class User {
 
     private String name;
 
-    @Column(unique=true)
+    @Column(unique = true)
     private String username;
-    private String hash;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Column(unique = true)
+    private String token;
 
     @ManyToMany(
             fetch = FetchType.LAZY,
@@ -30,17 +35,10 @@ public class User {
 
     }
 
-    public User(String name, String username, String hash) {
+    public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
-        this.hash = hash;
-    }
-
-    public User(String name, String username, String hash, List<Event> events) {
-        this.name = name;
-        this.username = username;
-        this.hash = hash;
-        this.events = events;
+        this.password = password;
     }
 
     public Long getId() {
@@ -67,12 +65,20 @@ public class User {
         this.username = username;
     }
 
-    public String getHash() {
-        return hash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHash(String hash) {
-        this.hash = hash;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public List<Event> getEvents() {

@@ -1,8 +1,9 @@
 package project.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import project.controller.exceptions.BadRequestException;
+import project.controller.exceptions.NotFoundException;
 import project.persistence.entities.User;
 import project.service.UserService;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * in your project
  */
 @RestController
-@RequestMapping("/")
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
@@ -23,20 +24,10 @@ public class UserController {
         this.userService = userService;
     }
 
-    // Example: POST localhost:8080/user
-    // RequestBody: { name, username, hash }
-    // name, username and hash are strings.  username is unique.
-    // Returns user with new ID
-    @CrossOrigin(origins = "*")
-    @RequestMapping(path="/user", method=RequestMethod.POST)
-    public User registerUser(@RequestBody User user) {
-        return userService.save(user);
-    }
-
     // Example: GET localhost:8080/user
     // Returns list of all users
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/user", method=RequestMethod.GET)
+    @RequestMapping(path="", method=RequestMethod.GET)
     public List<User> listAllUsers() {
         return userService.findAll();
     }
@@ -45,9 +36,13 @@ public class UserController {
     // id is userID
     // Returns corresponding user, users eventList is in response.
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/user/{id}", method=RequestMethod.GET)
-    public User findOneUser(@PathVariable String id) {
-        return userService.findOne(Long.parseLong(id));
+    @RequestMapping(path="/{id}", method=RequestMethod.GET)
+    public User findOneUser(@PathVariable String id) throws NotFoundException {
+        User user = userService.findOne(Long.parseLong(id));
+        if (user == null) {
+            throw new NotFoundException("User with id: " + id + " not found");
+        }
+        return user;
     }
 
 }

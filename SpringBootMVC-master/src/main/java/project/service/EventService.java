@@ -2,21 +2,22 @@ package project.service;
 
 
 import project.persistence.entities.Event;
+import project.persistence.entities.User;
 
 import java.util.Date;
 import java.util.List;
 
 public interface EventService {
 
-    Event save(Event event);
+    Event save(User user, Event event);
 
     void delete(Event event);
 
-    List<Event> findByDate(Date startDate, Date endDate);
+    List<Event> findByDate(User user, Date startDate, Date endDate);
 
     Event findOne(Long id);
 
-    Event updateEvent(Event event);
+    Event updateEvent(User user, Long id, Event event) throws Exception;
 
-    Event updateUserList(Long id, List<String> usernames);
+    Event updateUserList(User user, Long id, List<String> usernames) throws Exception;
 }

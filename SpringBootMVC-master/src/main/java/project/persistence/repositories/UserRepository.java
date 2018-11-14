@@ -20,4 +20,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findAll();
 
     User findOneById(Long id);
+
+    User findByToken(String token);
 }

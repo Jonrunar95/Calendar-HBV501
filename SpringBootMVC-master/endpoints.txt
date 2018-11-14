@@ -1,0 +1,74 @@
+POST /register
+Example RequestBody
+	{ name, username, password }
+name: String optional,
+username: String required,
+password: String required
+
+Returns newly created User
+
+
+POST /login
+Example RequestBody
+	{ username, password }
+username: String required,
+password: String required
+
+Returns User with token.
+
+
+MUST BE AUTHENTICATED
+
+GET /users
+
+Returns list of all users.
+
+
+GET /users/{id}
+id: Long
+
+Returns user with userID=id
+
+
+GET /event?startDate={startDate}&endDate={endDate}
+startDate: date in milliseconds,
+endDate: date in milliseconds
+
+Returns list of all events viewable by user with startDate between startDate and endDate
+
+
+GET /event/{id}
+id: Long
+
+Returns event with eventID=id
+
+
+POST /event
+Example RequestBody
+	{ startDate, endDate, title, description }
+startDate: date in milliseconds required,
+endDate: date in milliseconds required,
+title: String required,
+description: String optional
+
+Returns newly created event.  Event has been added to users eventList
+
+
+POST /event/{id}/users
+Example RequestBody
+	[ username_1, username_2, ... , username_k ]
+id: Long
+username_i: String username of registered user
+
+Returns event with eventID=id with updated userList.
+
+POST /event/{id}
+Example RequestBody
+	{ startDate, endDate, title, description }
+id: Long
+startDate: date in milliseconds optional,
+endDate: date in milliseconds optional,
+title: String optional,
+description: optional
+
+Returns event with eventID=id with updated startDate, endDate, title or description

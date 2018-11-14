@@ -4,11 +4,11 @@ class Calendar extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       startDate: 0,
       endDate: 0,
-      data: null, 
-      loading: true, 
+      data: null,
+      loading: true,
       error: false,
     };
     this.getEvents = this.getEvents.bind(this);
@@ -28,7 +28,7 @@ class Calendar extends Component {
   async fetchData () {
     const startDate = new Date().getTime() - 604800000
     const endDate = new Date().getTime() + 604800000;
-    const url = 'http://localhost:8080/event?startDate=' + startDate + '&endDate=' + endDate;
+    const url = `http://localhost:8080/event?startDate=${startDate}&endDate=${endDate}`;
     console.log(url)
     const response = await fetch(url)
     const data = await response.json();

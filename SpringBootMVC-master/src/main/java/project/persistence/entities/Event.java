@@ -4,6 +4,7 @@ import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,13 @@ public class Event {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private Date startDate;
+
+    @Column(nullable = false)
     private Date endDate;
-    private Long ownerID;
+
+    @Column(nullable = false)
     private String title;
     private String description;
 
@@ -41,10 +46,9 @@ public class Event {
 
     }
 
-    public Event(Date startDate, Date endDate, Long ownerID, String title, String description) {
+    public Event(Date startDate, Date endDate, String title, String description) {
         this.startDate = startDate;
         this.endDate = endDate;
-        this.ownerID = ownerID;
         this.title = title;
         this.description = description;
     }
@@ -71,14 +75,6 @@ public class Event {
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
-    }
-
-    public Long getOwnerID() {
-        return ownerID;
-    }
-
-    public void setOwnerID(Long ownerID) {
-        this.ownerID = ownerID;
     }
 
     public String getTitle() {
