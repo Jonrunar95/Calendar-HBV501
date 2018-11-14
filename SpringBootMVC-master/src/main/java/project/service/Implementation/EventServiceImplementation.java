@@ -28,6 +28,11 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event save(User user, Event event) {
+        // Set sensitive information as null
+        user.setToken(null);
+        user.setPassword(null);
+        user.setEvents(null);
+
         event.setUsers(new ArrayList<>());
         event.getUsers().add(user);
 
@@ -40,8 +45,20 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public List<Event> findByDate(Date startDate, Date endDate) {
-        return cleanEventList(eventRepository.findByStartDateBetween(startDate, endDate));
+    public List<Event> findByDate(User user, Date startDate, Date endDate) {
+
+        List<Event> filtered = new ArrayList<>();
+
+        if (user.getEvents() == null) return filtered;
+
+        for (Event event : user.getEvents()) {
+            Date eventStartDate = event.getStartDate();
+            if (eventStartDate.after(startDate) && eventStartDate.before(endDate)) {
+                filtered.add(event);
+            }
+        }
+
+        return filtered;
     }
 
     @Override
@@ -50,12 +67,14 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event updateEvent(Long id, Event event) {
+    public Event updateEvent(User user, Long id, Event event) throws Exception {
 
         // Find the event being updated
         Event currentEvent = eventRepository.findOneById(id);
 
         if (event == null) return null;
+
+        if (!this.canUpdate(user, currentEvent)) throw new Exception("Cannot update event!");
 
         // Only update available fields.
         if (event.getStartDate() != null) currentEvent.setStartDate(event.getStartDate());
@@ -67,11 +86,13 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public Event updateUserList(Long id, List<String> usernames) {
+    public Event updateUserList(User user, Long id, List<String> usernames) throws Exception {
         // Get event with id
         Event event = eventRepository.findOneById(id);
 
         if (event == null) return null;
+
+        if (!this.canUpdate(user, event)) throw new Exception("Cannot update event!");
 
         // Get current userList
         List <User> currentUserList = event.getUsers();
@@ -79,9 +100,9 @@ public class EventServiceImplementation implements EventService {
 
         // Validate each user and add to List
         for (String username : usernames) {
-            User user = userRepository.findUserByUsername(username);
-            if (user != null && !currentUserList.contains(user)) {
-                currentUserList.add(user);
+            User currentUser = userRepository.findUserByUsername(username);
+            if (currentUser != null && !currentUserList.contains(currentUser)) {
+                currentUserList.add(currentUser);
             }
         }
 
@@ -96,6 +117,13 @@ public class EventServiceImplementation implements EventService {
         // Clean event object
         return cleanEvent(event);
 
+    }
+
+    private boolean canUpdate(User user, Event event) {
+        // Cannot update event not shared with you;
+        if (user.getEvents() == null) return false;
+        if (!user.getEvents().contains(event)) return false;
+        return true;
     }
 
     // set events for each user as null to prevent infinite recursive

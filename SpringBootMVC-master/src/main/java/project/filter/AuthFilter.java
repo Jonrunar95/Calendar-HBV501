@@ -42,12 +42,10 @@ public class AuthFilter implements Filter {
 
         try {
             authenticate(token);
+            chain.doFilter(request, response);
         } catch (UnauthorizedException e) {
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
-
-        chain.doFilter(request, response);
-
     }
 
     @Override

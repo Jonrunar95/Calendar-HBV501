@@ -23,7 +23,10 @@ public class FilterConfig {
 
         registrationBean.setFilter(new AuthFilter(userRepository));
 
+        registrationBean.addUrlPatterns("/users");
         registrationBean.addUrlPatterns("/users/*");
+        registrationBean.addUrlPatterns("/event");
+        registrationBean.addUrlPatterns("/event/*");
 
         return registrationBean;
 

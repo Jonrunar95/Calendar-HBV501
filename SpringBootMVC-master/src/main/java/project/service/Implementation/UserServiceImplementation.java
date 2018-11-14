@@ -47,11 +47,23 @@ public class UserServiceImplementation implements UserService {
 
         if (!user.getPassword().equals(byUsername.getPassword())) return null;
 
-        String token = Long.toHexString(Double.doubleToLongBits(Math.random()));
+        while (true) {
+            try {
+                String token = Long.toHexString(Double.doubleToLongBits(Math.random()));
 
-        byUsername.setToken(token);
+                byUsername.setToken(token);
 
-        return cleanUser(userRepository.save(byUsername));
+                User loggedIn = cleanUser(userRepository.save(byUsername));
+
+                loggedIn.setEvents(null);
+                loggedIn.setPassword(null);
+
+                return loggedIn;
+            } catch (Exception e) {
+
+            }
+        }
+
     }
 
     @Override

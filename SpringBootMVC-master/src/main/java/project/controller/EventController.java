@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.controller.exceptions.BadRequestException;
 import project.controller.exceptions.NotFoundException;
+import project.controller.exceptions.UnauthorizedException;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
 import project.service.EventService;
@@ -35,8 +36,13 @@ public class EventController {
     // Returns list of events with startDate between x and y
     @CrossOrigin(origins = "*")
     @RequestMapping(path="", method=RequestMethod.GET)
-    public List<Event> getEvents(@RequestParam String startDate, String endDate) {
+    public List<Event> getEvents(
+            @RequestParam String startDate, String endDate,
+            @RequestHeader(value = "Authentication") String token
+    ) {
+        User user = userService.findByToken(token);
         return eventService.findByDate(
+                user,
                 new Date(Long.parseLong(startDate)),
                 new Date(Long.parseLong(endDate))
         );
@@ -74,9 +80,8 @@ public class EventController {
                     "constraint [end_date]; nested exception is " +
                             "org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
                 throw new BadRequestException("Start date, end date and title cannot be null");
-            } else {
-                throw e;
             }
+            throw e;
         }
     }
 
@@ -86,13 +91,25 @@ public class EventController {
     // Returns event with updated UserList based on valid usernames given in request body
     @CrossOrigin(origins = "*")
     @RequestMapping(path="/{id}/users", method=RequestMethod.POST)
-    public Event updateUserList(@RequestBody List<String> usernames, @PathVariable String id) throws NotFoundException {
-        Event event = eventService.updateUserList(Long.parseLong(id), usernames);
-        if (event == null) {
-            throw new NotFoundException("Event with id: " + id + " not found");
-        }
+    public Event updateUserList(
+            @RequestBody List<String> usernames,
+            @PathVariable String id,
+            @RequestHeader(value = "Authorization") String token
+    ) throws Exception {
+        try {
+            User user = userService.findByToken(token);
+            Event event = eventService.updateUserList(user, Long.parseLong(id), usernames);
+            if (event == null) {
+                throw new NotFoundException("Event with id: " + id + " not found");
+            }
 
-        return event;
+            return event;
+        } catch (Exception e) {
+            if (e.getMessage() == "Cannot update event!") {
+                throw new UnauthorizedException(e.getMessage());
+            }
+            throw e;
+        }
     }
 
 
@@ -102,13 +119,26 @@ public class EventController {
     // Returns event with updated fields
     @CrossOrigin(origins = "*")
     @RequestMapping(path="/{id}", method=RequestMethod.POST)
-    public Event updateUserList(@RequestBody Event event, @PathVariable String id) throws NotFoundException {
-        Event other = eventService.updateEvent(Long.parseLong(id), event);
-        if (other == null) {
-            throw new NotFoundException("Event with id: " + id + " not found");
+    public Event updateEvent(
+            @RequestBody Event event,
+            @PathVariable String id,
+            @RequestHeader(value = "Authorization") String token
+    ) throws Exception {
+        try {
+            User user = userService.findByToken(token);
+            Event other = eventService.updateEvent(user, Long.parseLong(id), event);
+            if (other == null) {
+                throw new NotFoundException("Event with id: " + id + " not found");
+            }
+
+            return other;
+        } catch (Exception e) {
+            if (e.getMessage() == "Cannot update event!") {
+                throw new UnauthorizedException(e.getMessage());
+            }
+            throw e;
         }
 
-        return other;
     }
 
 }

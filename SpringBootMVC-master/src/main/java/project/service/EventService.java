@@ -13,11 +13,11 @@ public interface EventService {
 
     void delete(Event event);
 
-    List<Event> findByDate(Date startDate, Date endDate);
+    List<Event> findByDate(User user, Date startDate, Date endDate);
 
     Event findOne(Long id);
 
-    Event updateEvent(Long id, Event event);
+    Event updateEvent(User user, Long id, Event event) throws Exception;
 
-    Event updateUserList(Long id, List<String> usernames);
+    Event updateUserList(User user, Long id, List<String> usernames) throws Exception;
 }
