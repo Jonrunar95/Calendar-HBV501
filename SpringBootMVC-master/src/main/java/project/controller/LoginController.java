@@ -17,6 +17,7 @@ public class LoginController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User loginUser(@RequestBody User user) throws BadRequestException {
         User loggedIn = userService.login(user);

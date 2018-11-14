@@ -10,7 +10,7 @@ class CreateUser extends Component {
       password2: '',
       samePassword: true
     };
-  
+
     this.changeUsername = this.changeUsername.bind(this);
     this.changeName = this.changeName.bind(this);
     this.changePassword = this.changePassword.bind(this);
@@ -32,7 +32,7 @@ class CreateUser extends Component {
   changePassword2(event) {
     this.setState({password2: event.target.value});
   }
-  
+
   handleSubmit(event) {
     event.preventDefault();
     const {
@@ -45,7 +45,7 @@ class CreateUser extends Component {
   if(password !== password2) {
     this.setState({ samePassword: false })
   }
-  
+
   else {
     this.setState({ samePassword: true })
     const data = {
@@ -54,7 +54,7 @@ class CreateUser extends Component {
       hash: password
     }
 
-    fetch('http://localhost:8080/user', {
+    fetch('http://localhost:8080/register', {
       method: 'POST',
       body: JSON.stringify(data)
     })
@@ -80,7 +80,7 @@ class CreateUser extends Component {
     const { samePassword } = this.state
     if (samePassword === false) {
       return (<p>Ekki sama password</p>);
-    } 
+    }
     return <p></p>
   }
 
@@ -106,10 +106,10 @@ class CreateUser extends Component {
             <label  className="book_edit_label">
               <div>
                 Username:
-              </div> 
+              </div>
               <div>
                 <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
-              </div>                
+              </div>
             </label>
           </div>
           <div className="margin_div">
@@ -118,35 +118,35 @@ class CreateUser extends Component {
                 Name:
               </div>
               <div>
-                <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>                  
+                <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
               </div>
             </label>
           </div>
           <div className="margin_div">
-            <label> 
+            <label>
               <div>
-                Password:  
+                Password:
               </div>
               <div>
-                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/> 
+                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
               </div>
             </label>
           </div>
           <div className="margin_div">
           </div>
           <div className="margin_div">
-            <label className="book_edit_label"> 
+            <label className="book_edit_label">
               <div>
-                Password again:  
+                Password again:
               </div>
               <div>
-                <input className="book_edit_input" type='text' value={password2} onChange={this.changePassword2}/>  
+                <input className="book_edit_input" type='text' value={password2} onChange={this.changePassword2}/>
               </div>
             </label>
           </div>
           <div>
             <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
-          </div>          
+          </div>
         </form>
       </div>
     </div>
