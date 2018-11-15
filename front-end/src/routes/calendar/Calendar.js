@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import EventTable from '../../components/eventTable';
 
 class Calendar extends Component {
 
@@ -12,7 +13,6 @@ class Calendar extends Component {
       loading: true,
       error: false,
     };
-    this.getEvents = this.getEvents.bind(this);
   }
 
   async componentDidMount() {
@@ -26,21 +26,11 @@ class Calendar extends Component {
   }
 
   async fetchData () {
-    const startDate = new Date().getTime() - 604800000
-    const endDate = new Date().getTime() + 604800000;
+    const startDate = 0//new Date().getTime() - 604800000
+    const endDate = 100000000000000000//new Date().getTime() + 604800000;
     const url = `/event?startDate=${startDate}&endDate=${endDate}`;
     const response = await api.get(url);
     return response;
-  }
-
-  getEvents(data) {
-    const cat =
-    data.map((event) =>
-      <div key={event.id}>
-        <p>{event.title}</p>
-      </div>
-      );
-    return cat;
   }
 
   render() {
@@ -54,9 +44,11 @@ class Calendar extends Component {
       return (<div>Villa við að sækja gögn</div>);
     }
 
+    const { data: events } = data;
+
     return (
         <div>
-            {this.getEvents(data.data)}
+          <EventTable data={events}/>
         </div>
     );
   }

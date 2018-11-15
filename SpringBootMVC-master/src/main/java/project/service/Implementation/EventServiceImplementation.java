@@ -29,6 +29,8 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event save(User user, Event event) {
+        this.catchEmptyString(event);
+
         event.setUsers(new ArrayList<>());
         event.getUsers().add(user);
 
@@ -69,6 +71,7 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event updateEvent(User user, Long id, Event event) throws Exception {
+        this.catchEmptyString(event);
 
         // Find the event being updated
         Event currentEvent = eventRepository.findOneById(id);
@@ -145,5 +148,10 @@ public class EventServiceImplementation implements EventService {
             event = cleanEvent(event);
         }
         return eventList;
+    }
+
+    private void catchEmptyString(Event event) {
+        if (event.getTitle().equals("")) event.setTitle(null);
+        if (event.getDescription().equals("")) event.setDescription(null);
     }
 }

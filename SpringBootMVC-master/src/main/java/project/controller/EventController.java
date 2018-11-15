@@ -78,8 +78,16 @@ public class EventController {
         } catch (Exception e) {
             if (e.getMessage().equals(
                     "could not execute statement; SQL [n/a]; " +
-                    "constraint [end_date]; nested exception is " +
-                            "org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
+                    "constraint [start_date]; nested exception is " +
+                            "org.hibernate.exception.ConstraintViolationException: could not execute statement") ||
+                    e.getMessage().equals(
+                            "could not execute statement; SQL [n/a]; " +
+                                    "constraint [end_date]; nested exception is " +
+                                    "org.hibernate.exception.ConstraintViolationException: could not execute statement") ||
+                    e.getMessage().equals(
+                            "could not execute statement; SQL [n/a]; " +
+                                    "constraint [title]; nested exception is " +
+                                    "org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
                 throw new BadRequestException("Start date, end date and title cannot be null");
             }
             throw e;

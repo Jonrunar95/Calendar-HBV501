@@ -29,15 +29,6 @@ class Users extends Component {
     return response;
   }
 
-  getUsers(data) {
-    const cat = data.map((user) =>
-      <div key={user.id}>
-        <p>{user.username}</p>
-      </div>
-    )
-    return cat;
-  }
-
   render() {
     const { data, loading, error } = this.state;
 
