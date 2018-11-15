@@ -19,6 +19,7 @@ import java.util.List;
  * in your project
  */
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/event")
 public class EventController {
 
@@ -38,7 +39,7 @@ public class EventController {
     @RequestMapping(path="", method=RequestMethod.GET)
     public List<Event> getEvents(
             @RequestParam String startDate, String endDate,
-            @RequestHeader(value = "Authentication") String token
+            @RequestHeader(value = "Authorization") String token
     ) {
         User user = userService.findByToken(token);
         return eventService.findByDate(

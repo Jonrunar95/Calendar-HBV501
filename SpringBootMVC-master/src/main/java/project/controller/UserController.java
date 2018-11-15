@@ -14,6 +14,7 @@ import java.util.List;
  * in your project
  */
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/users")
 public class UserController {
 

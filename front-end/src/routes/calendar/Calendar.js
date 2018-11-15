@@ -18,7 +18,6 @@ class Calendar extends Component {
   async componentDidMount() {
     try {
       const data = await this.fetchData();
-      console.log(data)
       this.setState({ data, loading: false });
     } catch (error) {
       console.error('Error fetching data', error);
@@ -30,14 +29,13 @@ class Calendar extends Component {
     const startDate = new Date().getTime() - 604800000
     const endDate = new Date().getTime() + 604800000;
     const url = `/event?startDate=${startDate}&endDate=${endDate}`;
-    console.log(url)
     const response = await api.get(url);
     return response;
   }
 
   getEvents(data) {
-    const cat = 
-    data.map((event) => 
+    const cat =
+    data.map((event) =>
       <div key={event.id}>
         <p>{event.title}</p>
       </div>
@@ -47,7 +45,6 @@ class Calendar extends Component {
 
   render() {
     const { data, loading, error } = this.state
-    console.log(data)
 
     if (loading) {
       return (<div>Hleð inn gögnum...</div>);
@@ -59,7 +56,7 @@ class Calendar extends Component {
 
     return (
         <div>
-            {this.getEvents(data)}
+            {this.getEvents(data.data)}
         </div>
     );
   }

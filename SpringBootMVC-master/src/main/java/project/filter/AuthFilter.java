@@ -38,13 +38,20 @@ public class AuthFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        String token = req.getHeader("Authorization");
+        String method = req.getMethod();
 
-        try {
-            authenticate(token);
-            chain.doFilter(request, response);
-        } catch (UnauthorizedException e) {
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+        if (!(method.equals("POST") || method.equals("GET"))) chain.doFilter(request, response);
+
+        else {
+            String token = req.getHeader("Authorization");
+
+            try {
+                authenticate(token);
+
+                chain.doFilter(request, response);
+            } catch (UnauthorizedException e) {
+                res.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
+            }
         }
     }
 

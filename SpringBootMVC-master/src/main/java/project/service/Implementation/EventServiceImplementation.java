@@ -59,7 +59,7 @@ public class EventServiceImplementation implements EventService {
             }
         }
 
-        return filtered;
+        return cleanEventList(filtered);
     }
 
     @Override

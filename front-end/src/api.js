@@ -1,5 +1,5 @@
 
-const baseurl = 'http://suadeo.serveo.net';
+const baseurl = 'http://localhost:8080'; //'http://suadeo.serveo.net';
 
 async function get(endpoint) {
 
@@ -8,13 +8,11 @@ async function get(endpoint) {
   const url = `${baseurl}${endpoint}`;
 
   const options = {
-    credentials: 'include',
+    method: 'GET',
     headers: {},
   };
 
   options.headers['Authorization'] = `Bearer ${token}`;
-
-  console.log(options);
 
   const response = await fetch(url, options);
 
