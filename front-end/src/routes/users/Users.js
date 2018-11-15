@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import api from '../../api';
+import User from '../../components/User';
 
 class Users extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
-      data: null, 
-      loading: true, 
+    this.state = {
+      data: null,
+      loading: true,
       error: false,
     };
-    this.getEvents = this.getEvents.bind(this);
+    this.getUsers = this.getUsers.bind(this);
   }
 
   async componentDidMount() {
@@ -23,14 +25,13 @@ class Users extends Component {
   }
 
   async fetchData () {
-    const response = await fetch('http://localhost:8080/user')
-    const data = await response.json();
-    return data;
+    const response = api.get('/users');
+    return response;
   }
 
-  getEvents(data) {
-    const cat = data.map((user) => 
-      <div>
+  getUsers(data) {
+    const cat = data.map((user) =>
+      <div key={user.id}>
         <p>{user.username}</p>
       </div>
     )
@@ -38,8 +39,9 @@ class Users extends Component {
   }
 
   render() {
-    const { data, loading, error } = this.state
-    console.log(data)
+    const { data, loading, error } = this.state;
+
+
 
     if (loading) {
       return (<div>Hleð inn gögnum...</div>);
@@ -49,9 +51,12 @@ class Users extends Component {
       return (<div>Villa við að sækja gögn</div>);
     }
 
+    const { data: userList } = data;
     return (
         <div>
-            {this.getEvents(data)}
+          {userList.map((user) =>
+            (<User key={user.id} username={user.username} name={user.name}/>)
+          )}
         </div>
     );
   }
