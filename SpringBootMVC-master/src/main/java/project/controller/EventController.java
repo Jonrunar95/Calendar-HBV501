@@ -141,4 +141,16 @@ public class EventController {
 
     }
 
+    @CrossOrigin(origins = "*")
+    @RequestMapping(path="/{id}/delete", method=RequestMethod.GET)
+    public void deleteUser(@PathVariable String id, @RequestHeader(value="Authorization") String token) throws UnauthorizedException {
+        User user = userService.findByToken(token);
+        try {
+            eventService.delete(user, Long.parseLong(id));
+        } catch (Exception e) {
+            if (e.getMessage().equals("Cannot delete event")) throw new UnauthorizedException(e.getMessage());
+            else throw e;
+        }
+    }
+
 }

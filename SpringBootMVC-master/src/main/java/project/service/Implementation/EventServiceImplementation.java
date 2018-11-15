@@ -2,6 +2,7 @@ package project.service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import project.controller.exceptions.UnauthorizedException;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
 import project.persistence.repositories.EventRepository;
@@ -28,11 +29,6 @@ public class EventServiceImplementation implements EventService {
 
     @Override
     public Event save(User user, Event event) {
-        // Set sensitive information as null
-        user.setToken(null);
-        user.setPassword(null);
-        user.setEvents(null);
-
         event.setUsers(new ArrayList<>());
         event.getUsers().add(user);
 
@@ -40,8 +36,13 @@ public class EventServiceImplementation implements EventService {
     }
 
     @Override
-    public void delete(Event event) {
-        eventRepository.delete(event);
+    public void delete(User user, Long id) throws UnauthorizedException {
+        Event currentEvent = eventRepository.findOneById(id);
+
+        if (!this.canUpdate(user, currentEvent)) throw new UnauthorizedException("Cannot delete event");
+        else {
+            eventRepository.delete(currentEvent);
+        }
     }
 
     @Override
@@ -132,6 +133,8 @@ public class EventServiceImplementation implements EventService {
         if (event == null) return null;
         if (event.getUsers() == null) return event;
         for (User user: event.getUsers()) {
+            user.setToken(null);
+            user.setPassword(null);
             user.setEvents(null);
         }
         return event;

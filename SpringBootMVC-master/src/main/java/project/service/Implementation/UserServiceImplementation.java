@@ -1,6 +1,7 @@
 package project.service.Implementation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
@@ -13,14 +14,18 @@ import java.util.List;
 public class UserServiceImplementation implements UserService {
 
     private UserRepository userRepository;
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     @Autowired
     public UserServiceImplementation(UserRepository repository) {
         this.userRepository = repository;
+        this.passwordEncoder = new BCryptPasswordEncoder(10);
     }
 
     @Override
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return cleanUser(userRepository.save(user));
     }
 
@@ -45,7 +50,7 @@ public class UserServiceImplementation implements UserService {
 
         if (byUsername == null) return null;
 
-        if (!user.getPassword().equals(byUsername.getPassword())) return null;
+        if (!passwordEncoder.matches(user.getPassword(), byUsername.getPassword())) return null;
 
         while (true) {
             try {
@@ -53,7 +58,7 @@ public class UserServiceImplementation implements UserService {
 
                 byUsername.setToken(token);
 
-                User loggedIn = cleanUser(userRepository.save(byUsername));
+                User loggedIn = userRepository.save(byUsername);
 
                 loggedIn.setEvents(null);
                 loggedIn.setPassword(null);
@@ -74,6 +79,7 @@ public class UserServiceImplementation implements UserService {
     private User cleanUser(User user) {
         if (user == null) return null;
         user.setPassword(null);
+        user.setToken(null);
 
         if (user.getEvents() == null) return user;
 

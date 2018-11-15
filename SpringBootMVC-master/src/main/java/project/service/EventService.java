@@ -1,6 +1,7 @@
 package project.service;
 
 
+import project.controller.exceptions.UnauthorizedException;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
 
@@ -11,7 +12,7 @@ public interface EventService {
 
     Event save(User user, Event event);
 
-    void delete(Event event);
+    void delete(User user, Long id) throws UnauthorizedException;
 
     List<Event> findByDate(User user, Date startDate, Date endDate);
 
