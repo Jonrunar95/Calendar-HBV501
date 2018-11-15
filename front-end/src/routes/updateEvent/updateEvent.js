@@ -7,7 +7,7 @@ class UpdateEvent extends Component {
 
   async componentDidMount() {
     const { pathname } = this.props.location;
-    const id = pathname.split('/')[3];
+    const id = pathname.split('/')[2];
 
     try {
       const { data, status } = await api.get(`/event/${id}`);
@@ -25,7 +25,7 @@ class UpdateEvent extends Component {
 
   render(){
     const { pathname } = this.props.location;
-    const id = pathname.split('/')[3];
+    const id = pathname.split('/')[2];
 
     const { data, loading, error, errorMsg } = this.state;
 

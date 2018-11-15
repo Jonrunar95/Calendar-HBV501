@@ -10,6 +10,7 @@ import CreateUser from './routes/createUser';
 import CreateEvent from './routes/createEvent';
 import UpdateEvent from './routes/updateEvent';
 import Login from './routes/login';
+import ViewEvent from './routes/viewEvent';
 import Navigation from './components/navigation';
 import Back from './components/back';
 
@@ -25,7 +26,8 @@ class App extends Component {
               <Switch>
                 <Route path="/" exact component={Home} />
                 <Route exact path='/event/new' component={CreateEvent}/>
-                <Route exact path='/event/update/:id' component={UpdateEvent}/>
+                <Route exact path='/event/:id/edit' component={UpdateEvent}/>
+                <Route exact path='/event/:id' component={ViewEvent}/>
                 <Route exact path="/Calendar" component={Calendar} />
                 <Route exact path="/Users" component={Users} />
                 <Route exact path='/register' component={CreateUser}/>

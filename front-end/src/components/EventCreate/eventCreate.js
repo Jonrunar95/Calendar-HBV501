@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api.js';
+import { Redirect } from 'react-router-dom';
+
 
 
 class EventCreate extends Component {
@@ -96,14 +98,7 @@ class EventCreate extends Component {
     } = this.state
 
     if (data) {
-      return (
-        <div>
-          <p> {data.id} </p>
-          <p> {data.title} </p>
-          <p> Start Date: {data.startDate} </p>
-          <p> End Date: {data.endDate} </p>
-        </div>
-      )
+        return (<Redirect to={{pathname: `/event/${data.id}`, state: {from: this.props.location}}} />)
     }
 
 

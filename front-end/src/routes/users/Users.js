@@ -11,7 +11,6 @@ class Users extends Component {
       loading: true,
       error: false,
     };
-    this.getUsers = this.getUsers.bind(this);
   }
 
   async componentDidMount() {
