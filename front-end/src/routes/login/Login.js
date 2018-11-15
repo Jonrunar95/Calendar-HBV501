@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api';
+import { Redirect } from 'react-router-dom';
 //import bcrypt from 'Bcrypt'
 
 class Login extends Component {
@@ -8,6 +9,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+      loggedIn: false,
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -39,22 +41,11 @@ class Login extends Component {
     const response = await api.post('/login', data);
 
     console.log(response);
-
-    // fetch('http://localhost:8080/login', {
-    //   method: 'Post',
-    //   body: JSON.stringify(data)
-    // })
-    // .then((response) => {
-    //   alert('User has been added')
-    //   console.log(response)
-    //   //this.props.history.push('/books');
-    // })
-    // .catch((err) => {
-    //   if (err.response) {
-    //     alert(err.response.data.error);
-    //   }
-    // });
-
+    const { status } = response;
+    if(status === 200) {
+      window.localStorage.setItem('token', response.data.token)
+      this.setState({loggedIn: true})
+    }
   }
 
   render(){
@@ -62,7 +53,13 @@ class Login extends Component {
     const {
       username,
       password,
+      loggedIn,
     } = this.state
+
+
+    if(loggedIn) {
+      return (<Redirect to={{pathname: '/calendar', state: {from: this.props.location}}} />)
+    }
 
   return (
     <div>

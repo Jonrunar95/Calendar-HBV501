@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import api from '../../api';
 
 class Calendar extends Component {
 
@@ -28,11 +29,10 @@ class Calendar extends Component {
   async fetchData () {
     const startDate = new Date().getTime() - 604800000
     const endDate = new Date().getTime() + 604800000;
-    const url = `http://localhost:8080/event?startDate=${startDate}&endDate=${endDate}`;
+    const url = `/event?startDate=${startDate}&endDate=${endDate}`;
     console.log(url)
-    const response = await fetch(url)
-    const data = await response.json();
-    return data;
+    const response = await api.get(url);
+    return response;
   }
 
   getEvents(data) {

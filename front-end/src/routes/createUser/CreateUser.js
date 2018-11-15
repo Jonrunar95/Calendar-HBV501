@@ -59,21 +59,6 @@ class CreateUser extends Component {
 
     console.log(response);
 
-    // fetch('http://localhost:8080/register', {
-    //   method: 'POST',
-    //   body: JSON.stringify(data)
-    // })
-    // .then((response) => {
-    //   alert('User has been added')
-    //   console.log(response)
-    //   //this.props.history.push('/books');
-    // })
-    // .catch((err) => {
-    //   if (err.response) {
-    //     alert(err.response.data.error);
-    //   }
-    // });
-
     }
   }
 
