@@ -105,9 +105,22 @@ class EventTable extends Component {
                 {row.map((cell, j) => {
                   return (
                     <td key={j} className='tableCell'>
-                      {cell.map(event =>
-                        <Link key={event.id} to={`/event/${event.id}`}> {event.title} </Link>
-                      )}
+                      {cell.map(event => {
+                        const endDate = new Date(event.endDate);
+                        const startDate = new Date(event.startDate);
+                        const millis = endDate.getTime() - startDate.getTime();
+                        const minutes = startDate.getMinutes();
+
+                        const style = {
+                          height: (millis/(1000*60*60))*20,
+                          top: 20 * (minutes / 60),
+                        };
+                        return (
+                            <Link key={event.id} className='tableEvent' style={style} to={`/event/${event.id}`}>
+                                {event.title}
+                             </Link>
+                        );
+                      })}
                     </td>
                   )
                 })}

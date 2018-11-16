@@ -41,7 +41,7 @@ class UpdateEvent extends Component {
       return (<p> {errorMsg} </p>);
     }
 
-    return (<EventCreate data={data} url={`/event/${id}`}/>);
+    return (<EventCreate pageTitle={'Edit Event'} data={data} url={`/event/${id}`}/>);
   }
 }
 

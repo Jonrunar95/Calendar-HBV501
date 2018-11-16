@@ -8,7 +8,9 @@ class ViewEvent extends Component {
     const id = pathname.split('/')[2];
 
 
-    return (<EventView url={`/event/${id}`} id={id}/>);
+    return (
+      <EventView url={`/event/${id}`} id={id}/>
+    );
   }
 }
 

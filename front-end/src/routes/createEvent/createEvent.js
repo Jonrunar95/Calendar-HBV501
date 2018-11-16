@@ -4,7 +4,7 @@ import EventCreate from '../../components/EventCreate';
 class CreateEvent extends Component {
 
   render(){
-    return (<EventCreate url='/event'/>);
+    return (<EventCreate pageTitle={'Create Event'} url='/event'/>);
   }
 }
 

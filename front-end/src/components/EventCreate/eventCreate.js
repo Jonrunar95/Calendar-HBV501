@@ -43,7 +43,6 @@ class EventCreate extends Component {
   }
 
   changeStartDate(event) {
-    console.log(event.target.value);
     this.setState({startDate: event.target.value});
   }
   changeEndDate(event) {
@@ -85,8 +84,6 @@ class EventCreate extends Component {
     } else {
       this.setState({ error: response.data.message });
     }
-
-
   }
 
 
@@ -101,16 +98,15 @@ class EventCreate extends Component {
       data,
     } = this.state
 
+    const { pageTitle } = this.props;
+
     if (data) {
         return (<Redirect to={{pathname: `/event/${data.id}`, state: {from: this.props.location}}} />)
     }
 
-    console.log(startDate);
-
-
     return (
       <div>
-        <h2 className="margin_div">Create Event</h2>
+        <h2 className="margin_div"> {pageTitle} </h2>
         <div className="change_div">
           <p> {error} </p>
           <form>

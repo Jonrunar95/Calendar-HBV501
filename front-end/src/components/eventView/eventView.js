@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../api.js';
-import User from '../User';
+import UserList from '../UserList';
 
 
 class EventView extends Component {
@@ -67,9 +67,7 @@ class EventView extends Component {
         <p> {startDate} </p>
         <p> {endDate} </p>
         <p> {description} </p>
-        {users.map((user) =>
-          <User key={user.id} username={user.username} name={user.name}/>
-        )}
+        <UserList users={users} />
         <Link to={`/event/${id}/edit`}> Edit Event </Link>
         <Link to={'/calendar'}> Back </Link>
       </div>
