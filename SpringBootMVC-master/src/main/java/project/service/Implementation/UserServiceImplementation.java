@@ -49,7 +49,7 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public User update(User user) {
-        return cleanUser(user);
+        return cleanUser(userRepository.save(user));
     }
 
     @Override
