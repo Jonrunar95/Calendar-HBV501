@@ -25,8 +25,13 @@ public class User {
 
     @ManyToMany(
             fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL,
-            mappedBy = "users"
+            mappedBy = "users",
+            cascade = {
+                    CascadeType.DETACH,
+                    CascadeType.MERGE,
+                    CascadeType.REFRESH,
+                    CascadeType.PERSIST
+                    }
     )
     private List<Event> events;
 

@@ -74,7 +74,7 @@ public class EventController {
     public Event postEvent(@RequestBody Event event, @RequestHeader(value="Authorization") String token) throws BadRequestException {
         User user = userService.findByToken(token);
         try {
-            return eventService.save(user, event);
+                return eventService.save(user, event);
         } catch (Exception e) {
             if (e.getMessage().equals(
                     "could not execute statement; SQL [n/a]; " +

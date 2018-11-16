@@ -26,8 +26,8 @@ class Calendar extends Component {
   }
 
   async fetchData () {
-    const startDate = 0//new Date().getTime() - 604800000
-    const endDate = 100000000000000000//new Date().getTime() + 604800000;
+    const startDate = new Date().getTime() - 604800000
+    const endDate = new Date().getTime() + 604800000;
     const url = `/event?startDate=${startDate}&endDate=${endDate}`;
     const response = await api.get(url);
     return response;

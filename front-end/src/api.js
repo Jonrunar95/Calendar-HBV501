@@ -53,25 +53,28 @@ async function post(endpoint, body) {
   };
 }
 
-async function login(username, password) {
-  const body = {
-    username,
-    password,
-  };
+async function deleteMethod(endpoint) {
 
-  const url = `${baseurl}/login`;
+  const token = window.localStorage.getItem('token');
+
+  const url = `${baseurl}${endpoint}`;
 
   const options = {
-    method: 'POST',
-    body: JSON.stringify(body),
+    method: 'DELETE',
     headers: {
-      'content-type': 'application/json',
     },
   };
 
+  if (token) {
+    options.headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  let data;
+
   const response = await fetch(url, options);
-  const data = await response.json();
   const { status } = response;
+  if (status !== 200) data = await response.json();
+
 
   return {
     status,
@@ -79,8 +82,9 @@ async function login(username, password) {
   };
 }
 
+
 export default {
   get,
-  login,
   post,
+  deleteMethod,
 };

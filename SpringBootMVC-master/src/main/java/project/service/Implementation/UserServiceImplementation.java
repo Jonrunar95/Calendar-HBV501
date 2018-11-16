@@ -31,6 +31,14 @@ public class UserServiceImplementation implements UserService {
 
     @Override
     public void delete(User user) {
+        List<Event> allEvents = user.getEvents();
+
+        for (Event event : allEvents) {
+            event.getUsers().remove(user);
+        }
+
+        user.getEvents().clear();
+
         userRepository.delete(user);
     }
 

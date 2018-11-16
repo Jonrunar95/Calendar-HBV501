@@ -10,27 +10,33 @@ class EventCreate extends Component {
 
     const { data } = props;
 
+    console.log(data);
+
     const today = new Date();
     const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T00:00`;
     const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T01:00`;
 
     if (data) {
       this.state = {
+        id: data.id ? data.id : null,
         startDate: data.startDate ? data.startDate.replace(/\+.*/, '') : startValue,
         endDate: data.endDate ? data.endDate.replace(/\+.*/, '') : endValue,
         title: data.title ? data.title : '',
         description: data.description ? data.description : '',
         error: '',
         data: null,
+        deleted: false,
       };
     } else {
       this.state = {
+        id: null,
         startDate: startValue,
         endDate: endValue,
         title: '',
         description: '',
         error: '',
         data: null,
+        deleted: false,
       };
     }
 
@@ -40,6 +46,7 @@ class EventCreate extends Component {
     this.changeTitle = this.changeTitle.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   changeStartDate(event) {
@@ -53,6 +60,20 @@ class EventCreate extends Component {
   }
   changeDescription(event) {
     this.setState({description: event.target.value});
+  }
+
+  async handleDelete(event) {
+    event.preventDefault();
+
+    const { id } = this.state;
+
+    const { status, data } = await api.deleteMethod(`/event/${id}/delete`);
+
+    if (status === 200) {
+      this.setState({ deleted: true });
+    } else {
+      this.setState({ error: data.message });
+    }
   }
 
   async handleSubmit(event) {
@@ -96,7 +117,14 @@ class EventCreate extends Component {
       description,
       error,
       data,
+      deleted,
     } = this.state
+
+    if (deleted) {
+      return (
+        <Redirect to={{pathname: `/calendar`, state: {from: this.props.location}}} />
+      );
+    }
 
     const { pageTitle } = this.props;
 
@@ -154,6 +182,8 @@ class EventCreate extends Component {
             </div>
             <div>
               <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
+              <input className='submit' type='submit' value='Delete' onClick={this.handleDelete}></input>
+
             </div>
           </form>
         </div>

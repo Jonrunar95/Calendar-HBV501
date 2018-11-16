@@ -40,7 +40,7 @@ public class AuthFilter implements Filter {
 
         String method = req.getMethod();
 
-        if (!(method.equals("POST") || method.equals("GET"))) chain.doFilter(request, response);
+        if (!(method.equals("POST") || method.equals("GET") || method.equals("DELETE"))) chain.doFilter(request, response);
 
         else {
             String token = req.getHeader("Authorization");

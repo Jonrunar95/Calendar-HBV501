@@ -45,6 +45,7 @@ public class EventServiceImplementation implements EventService {
 
         if (!this.canUpdate(user, currentEvent)) throw new UnauthorizedException("Cannot delete event");
         else {
+            user.getEvents().clear();
             eventRepository.delete(currentEvent);
         }
     }
@@ -153,7 +154,7 @@ public class EventServiceImplementation implements EventService {
     }
 
     private void catchEmptyString(Event event) {
-        if (event.getTitle().equals("")) event.setTitle(null);
-        if (event.getDescription().equals("")) event.setDescription(null);
+        if (event.getTitle() != null && event.getTitle().equals("")) event.setTitle(null);
+        if (event.getDescription() != null && event.getDescription().equals("")) event.setDescription(null);
     }
 }
