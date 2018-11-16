@@ -1,0 +1,20 @@
+.tableRow:nth-child(2n) {
+  background: #e2e2e2;
+}
+
+.tableCell {
+  height: 100%;
+}
+
+.tableCell:hover {
+  background: #aaaaaa;
+}
+
+.tableHeader {
+  font-weight: bold;
+}
+
+.tableHour {
+  font-style: italic;
+  font-weight: bold;
+}

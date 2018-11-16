@@ -10,10 +10,14 @@ class EventCreate extends Component {
 
     const { data } = props;
 
+    const today = new Date();
+    const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T00:00`;
+    const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T01:00`;
+
     if (data) {
       this.state = {
-        startDate: data.startDate ? data.startDate.replace(/\+.*/, '') : '',
-        endDate: data.endDate ? data.endDate.replace(/\+.*/, '') : '',
+        startDate: data.startDate ? data.startDate.replace(/\+.*/, '') : startValue,
+        endDate: data.endDate ? data.endDate.replace(/\+.*/, '') : endValue,
         title: data.title ? data.title : '',
         description: data.description ? data.description : '',
         error: '',
@@ -21,8 +25,8 @@ class EventCreate extends Component {
       };
     } else {
       this.state = {
-        startDate: '',
-        endDate: '',
+        startDate: startValue,
+        endDate: endValue,
         title: '',
         description: '',
         error: '',
@@ -100,6 +104,8 @@ class EventCreate extends Component {
     if (data) {
         return (<Redirect to={{pathname: `/event/${data.id}`, state: {from: this.props.location}}} />)
     }
+
+    console.log(startDate);
 
 
     return (
