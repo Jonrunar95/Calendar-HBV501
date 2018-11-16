@@ -41,6 +41,8 @@ public class EventServiceImplementation implements EventService {
     public void delete(User user, Long id) throws UnauthorizedException {
         Event currentEvent = eventRepository.findOneById(id);
 
+        if (currentEvent == null) return;
+
         if (!this.canUpdate(user, currentEvent)) throw new UnauthorizedException("Cannot delete event");
         else {
             eventRepository.delete(currentEvent);

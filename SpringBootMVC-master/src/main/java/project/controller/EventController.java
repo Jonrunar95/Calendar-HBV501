@@ -151,7 +151,7 @@ public class EventController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/{id}/delete", method=RequestMethod.GET)
+    @RequestMapping(path="/{id}/delete", method=RequestMethod.DELETE)
     public void deleteUser(@PathVariable String id, @RequestHeader(value="Authorization") String token) throws UnauthorizedException {
         User user = userService.findByToken(token);
         try {

@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(path="/delete", method=RequestMethod.GET)
+    @RequestMapping(path="/delete", method=RequestMethod.DELETE)
     public void deleteUser(@RequestHeader(value="Authorization") String token) {
         User user = userService.findByToken(token);
         userService.delete(user);
