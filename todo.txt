@@ -1,0 +1,14 @@
+Share event á framenda
+Laga calendar view "CSS"
+Laga Link fyrir event á calendar
+Bæta við header (navbar) fyrir allar síður
+Laga redirect á login þegar not authenticated
+Almennt CSS
+Dayview, weekview og monthview fyrir calendar (ef ekki mikið vesen)
+útfæra næstu viku virkni í calendar
+skilaboð fyrir nýjann notanda
+skilaboð fyrir login
+redirect á login eftir register
+
+
+
