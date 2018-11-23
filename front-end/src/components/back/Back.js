@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 
 class Back extends Component {
 
@@ -7,7 +8,7 @@ class Back extends Component {
 
     return (
         <div>
-            <a href="/"> Home </a>
+            <Link to="/"> Home </Link>
         </div>
     );
   }

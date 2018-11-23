@@ -45,6 +45,10 @@ class Login extends Component {
     if(status === 200) {
       window.localStorage.setItem('token', response.data.token)
       this.setState({loggedIn: true})
+      console.log(this.props)
+      //const { changeState } = this.props
+      //console.log(changeState)
+      this.props.changeState()
     }
   }
 

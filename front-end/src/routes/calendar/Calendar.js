@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import EventTable from '../../components/eventTable';
+import { Link } from 'react-router-dom'
 
 class Calendar extends Component {
 
@@ -48,7 +49,12 @@ class Calendar extends Component {
 
     return (
         <div>
-          <EventTable data={events}/>
+          <div>
+            <EventTable data={events}/>
+          </div>
+          <div>
+            <Link to='event/new'>Create new event</Link>
+          </div>
         </div>
     );
   }
