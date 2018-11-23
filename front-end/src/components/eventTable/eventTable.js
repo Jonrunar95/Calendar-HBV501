@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Event from '../event';
 import { Link } from 'react-router-dom';
 
 import './eventTable.css';
@@ -8,12 +7,12 @@ class EventTable extends Component {
 
   constructor(props) {
     super(props);
-    const { data } = props;
+    const { data, view } = props;
 
-    this.state = { data };
+    this.state = { data, view };
   }
 
-  generateTable() {
+  weekViewTable() {
     const { data } = this.state;
 
     const today = new Date();
@@ -76,9 +75,18 @@ class EventTable extends Component {
     return dayHeaders;
   }
 
+  generateTable() {
+    const table = this.weekViewTable();
+    const header = this.getDayHeaders();
+    return {
+      table,
+      header,
+    };
+  }
+
+
   render(){
-    const table = this.generateTable();
-    const days = this.getDayHeaders();
+    const { table, header } = this.generateTable();
 
     const hours = [];
 
@@ -88,11 +96,11 @@ class EventTable extends Component {
     }
 
     return (
-      <table>
+      <table className='calendar'>
         <thead>
           <tr>
             <td></td>
-            {days.map((td, i) =>
+            {header.map((td, i) =>
               <td className='tableHeader' key={i}> {td} </td>
             )}
           </tr>
