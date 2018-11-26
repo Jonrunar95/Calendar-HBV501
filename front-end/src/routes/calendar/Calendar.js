@@ -1,42 +1,28 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import EventTable from '../../components/eventTable';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import querystring from 'querystring';
+
 
 class Calendar extends Component {
 
   constructor(props) {
     super(props);
 
-    const { search } = this.props.location;
-
-    const view = search.match(/view=(month|week|day)/);
+    const { search: query } = this.props.location;
+    const { p = 1 } = querystring.parse(query.replace('?', ''));
 
     const millisDay = 1000 * 60 * 60 * 24;
 
-    let startDate = new Date().getTime() - (millisDay * (new Date().getDay() - 0));
-    let endDate = new Date().getTime() - (millisDay * (new Date().getDay() - 7));
-    let viewState = 'week';
+    // 00:00 sunday of current week
+    let startDate = new Date(new Date().toDateString()).getTime() - (millisDay * (new Date().getDay() - 0));
+    // 00:00 saturday of current week
+    let endDate = new Date(new Date().toDateString()).getTime() - (millisDay * (new Date().getDay() - 7));
 
-    if (view) {
-      viewState = view[0].replace(/view=/, '');
-
-      if (viewState === 'day') {
-        startDate = new Date().getTime() - millisDay;
-        endDate = new Date().getTime() + millisDay;
-      }
-      else if (viewState === 'week') {
-        startDate = new Date().getTime() - (millisDay * (new Date().getDay() - 0));
-        endDate = new Date().getTime() - (millisDay * (new Date().getDay() - 7));
-      }
-      else if (viewState === 'month') {
-        startDate = new Date().getTime() - (millisDay * (new Date().getDate() - 0));
-        endDate = new Date().getTime() - (millisDay * (new Date().getDay() - 31));
-      }
-    }
-
-
-
+    // Subtract / add 1 week
+    startDate += millisDay * 7 * (p - 1);
+    endDate += millisDay * 7 * (p - 1);
 
     this.state = {
       startDate,
@@ -44,7 +30,7 @@ class Calendar extends Component {
       data: null,
       loading: true,
       error: false,
-      view: 'viewState',
+      p,
     };
   }
 
@@ -66,8 +52,51 @@ class Calendar extends Component {
     return response;
   }
 
+  async componentWillReceiveProps(nextProps) {
+    const { search: query } = this.props.location;
+    const { p = 1 } = querystring.parse(query.replace('?', ''));
+
+    this.setState({ p });
+
+    let { startDate, endDate } = this.state;
+    const millisDay = 1000 * 60 * 60 * 24;
+
+    startDate += millisDay * 7 * (p - 1);
+    endDate += millisDay * 7 * (p - 1);
+
+    this.setState({ startDate, endDate });
+
+    try {
+      const data = await this.fetchData(startDate, endDate);
+      this.setState({ data, loading: false });
+    } catch (error) {
+      console.error('Error fetching data', error);
+      this.setState({ error: true, loading: false });
+    }
+  }
+
+  nextPage = () => {
+    const { search: query } = this.props.location;
+    const { p = 1 } = querystring.parse(query.replace('?', ''));
+
+    const next = Number(p) + 1;
+    const path = `/calendar?${querystring.stringify({ p: next })}`;
+
+    window.location = path;
+  }
+
+  prevPage = () => {
+    const { search: query } = this.props.location;
+    const { p = 1 } = querystring.parse(query.replace('?', ''));
+
+    const next = Number(p) - 1;
+    const path = `/calendar?${querystring.stringify({ p: next })}`;
+
+    window.location = path;
+  }
+
   render() {
-    const { data, loading, error, view } = this.state;
+    const { data, loading, error, startDate } = this.state;
 
     if (loading) {
       return (<div>Hleð inn gögnum...</div>);
@@ -82,10 +111,10 @@ class Calendar extends Component {
     return (
         <div>
           <div>
-            <button> Back one week </button>
-            <button> Forward one week </button>
+            <button onClick={this.prevPage}> &lt;- </button>
+            <button onClick={this.nextPage}> -&gt; </button>
 
-            <EventTable data={events} view={view} />
+            <EventTable data={events} startDate={startDate} />
           </div>
           <div>
             <Link to='event/new'>Create new event</Link>

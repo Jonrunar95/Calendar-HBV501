@@ -14,6 +14,7 @@ class EventTable extends Component {
 
   weekViewTable() {
     const { data } = this.state;
+    const { startDate } = this.props;
 
     const today = new Date();
     const weekDay = today.getDay();
@@ -32,7 +33,7 @@ class EventTable extends Component {
       const row = [];
 
       for (let j = 0; j < 7; j++) {
-        const newDay = new Date(today.getTime() - (millisDay * (weekDay - j)));
+        const newDay = new Date(startDate - (millisDay * (weekDay - j)));
         const eventsToday = byHour.filter(event => {
           const e = new Date(event.startDate);
           return (
@@ -62,13 +63,14 @@ class EventTable extends Component {
       'Sat',
     ];
 
+    const { startDate } = this.props;
+
     const dayHeaders = [];
-    let today = new Date();
-    const weekDay = today.getDay();
+    const weekDay = new Date(startDate).getDay();
     const millisDay = 24 * 60 * 60 * 1000;
 
     for (let i = 0; i < 7; i++) {
-      const newDay = new Date(today.getTime() - (millisDay * (weekDay - i)));
+      const newDay = new Date(startDate - (millisDay * (weekDay - i)));
       dayHeaders.push(`${names[i]} ${newDay.getDate()}.${newDay.getMonth() + 1}.${newDay.getFullYear()}`);
     }
 
