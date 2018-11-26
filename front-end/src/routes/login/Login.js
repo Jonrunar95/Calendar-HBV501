@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import { Redirect } from 'react-router-dom';
+import './Login.css';
 //import bcrypt from 'Bcrypt'
 
 class Login extends Component {
@@ -66,7 +67,7 @@ class Login extends Component {
     }
 
   return (
-    <div>
+    <div className = "login-box">
       <h2 className="margin_div">Login</h2>
       <div className="change_div">
         <form>

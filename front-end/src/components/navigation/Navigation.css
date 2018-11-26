@@ -3,9 +3,9 @@
     display: flex;
     flex-wrap: wrap;
     padding: 0em, 2em;
-    background-color: blue;
+    background-color: rgba(0, 0, 255, 0.507);
     padding: 0.2em;
-
+    box-shadow: 2px 2px 8px 0px grey;
 }
 
 .nav-bar > a {
@@ -18,9 +18,11 @@
     padding-right: 0.5em;
     text-decoration-line: none;
     background-color: rgb(212, 189, 255);
+    border: none;
     border-radius: 10%;
 }
 
 .button-link{
     text-decoration-line: none;
+    color: black;
 }
