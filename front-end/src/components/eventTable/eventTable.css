@@ -11,6 +11,8 @@
 
 .tableHeader {
   font-weight: bold;
+  background-color: rgba(156, 190, 252, 0.664);
+  border-radius: 10%;
 }
 
 .tableHour {
@@ -25,6 +27,12 @@
   /* padding: 10px; */
   width: 100%;
   height: 100%;
+  text-align: center;
+  text-decoration-line: none;
+  font-weight: bold;
+  font-size: small;
+  /* Hakk kannski betra að staðsetja rétt í react */
+  right:1px;
 }
 
 .tableEvent:hover {

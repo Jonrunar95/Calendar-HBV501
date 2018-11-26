@@ -29,9 +29,9 @@ export default class Navigation extends Component {
   loggedInButton() {
     const {isAuthenticated } = this.state
     if(isAuthenticated) {
-      return (<Link to='/logout'> Logout </Link>)
+      return (<Link className = "button-link" to='/logout'> Logout </Link>)
     } else {
-      return (<Link to='/login'> Login </Link>)
+      return (<Link className = "button-link" to='/login'> Login </Link>)
     }
   }
 
@@ -44,7 +44,7 @@ export default class Navigation extends Component {
           {this.loggedInButton()}
         </div>
         <div className='Button'>
-          <Link to='/calendar'>Calendar </Link>
+          <Link className = "button-link" to='/calendar'>Calendar </Link>
         </div>
       </nav>
     );
