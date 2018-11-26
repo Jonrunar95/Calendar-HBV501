@@ -106,6 +106,7 @@ class Calendar extends Component {
       return (<div>Villa við að sækja gögn</div>);
     }
 
+
     const { data: events } = data;
 
     return (

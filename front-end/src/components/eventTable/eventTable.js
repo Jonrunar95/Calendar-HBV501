@@ -122,8 +122,8 @@ class EventTable extends Component {
                         const minutes = startDate.getMinutes();
 
                         const style = {
-                          height: (millis/(1000*60*60))*20,
-                          top: 20 * (minutes / 60),
+                          height: (millis/(1000*60*60))*31,
+                          top: (minutes / 60)*30,
                         };
                         return (
                             <Link key={event.id} className='tableEvent' style={style} to={`/event/${event.id}`}>
