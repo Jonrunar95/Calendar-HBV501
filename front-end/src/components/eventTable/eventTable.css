@@ -33,7 +33,7 @@
   font-weight: bold;
   font-size: small;
   /* Hakk kannski betra að staðsetja rétt í react */
-  right:1px;
+  right:0.5px;
 }
 
 .tableEvent:hover {
