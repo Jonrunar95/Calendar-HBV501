@@ -20,7 +20,8 @@
 }
 
 .button-Create {
-    margin-left: 1.5%;
+    margin: auto;
+    min-width: 25rem;
     text-decoration-line: none;
     background-color: rgb(212, 189, 255);
     border: none;
