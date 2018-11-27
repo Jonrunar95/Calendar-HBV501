@@ -121,7 +121,7 @@ class EventTable extends Component {
                         const minutes = startDate.getMinutes();
 
                         const style = {
-                          height: (millis/(1000*60*60))*31,
+                          height: (millis/(1000*60*60))*28.8,
                           top: (minutes / 60)*30,
                         };
                         return (
