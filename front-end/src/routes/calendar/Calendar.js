@@ -32,7 +32,6 @@ class Calendar extends Component {
       data: null,
       loading: true,
       error: false,
-      p,
     };
   }
 
@@ -52,29 +51,6 @@ class Calendar extends Component {
     const url = `/event?startDate=${startDate}&endDate=${endDate}`;
     const response = await api.get(url);
     return response;
-  }
-
-  async componentWillReceiveProps(nextProps) {
-    const { search: query } = this.props.location;
-    const { p = 1 } = querystring.parse(query.replace('?', ''));
-
-    this.setState({ p });
-
-    let { startDate, endDate } = this.state;
-    const millisDay = 1000 * 60 * 60 * 24;
-
-    startDate += millisDay * 7 * (p - 1);
-    endDate += millisDay * 7 * (p - 1);
-
-    this.setState({ startDate, endDate });
-
-    try {
-      const data = await this.fetchData(startDate, endDate);
-      this.setState({ data, loading: false });
-    } catch (error) {
-      console.error('Error fetching data', error);
-      this.setState({ error: true, loading: false });
-    }
   }
 
   nextPage = () => {
