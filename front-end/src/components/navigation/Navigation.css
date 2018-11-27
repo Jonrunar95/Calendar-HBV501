@@ -27,3 +27,13 @@
     color: rgba(77, 76, 76, 0.897);
     font-weight: bold;
 }
+
+.logo{
+    font-weight: bold;
+    width: 11em;
+    text-align: right;
+    background-image: url("lion.png");
+    background-repeat: no-repeat;
+    background-size: 20px 20px;
+    color: rgba(77, 76, 76, 0.897);
+}
