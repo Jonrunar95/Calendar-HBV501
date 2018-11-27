@@ -50,4 +50,8 @@
   text-decoration-line: none;
   background-color: rgb(212, 189, 255);
   border: none;
+  border-radius: 1rem;
+  color: rgba(77, 76, 76, 0.897);
+  font-weight: bold;
+
 }
