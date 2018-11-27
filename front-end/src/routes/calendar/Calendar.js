@@ -91,8 +91,10 @@ class Calendar extends Component {
         <div className = 'main'>
           <Link className = "button-Create" to='event/new'>Create new event</Link>
           <div>
-            <button className = "calendar-Button button-left" onClick={this.prevPage}></button>
-            <button className = "calendar-Button button-right" onClick={this.nextPage}></button>
+            <div className='calendar-buttons'>
+              <button className = "calendar-Button button-left" onClick={this.prevPage}></button>
+              <button className = "calendar-Button button-right" onClick={this.nextPage}></button>
+            </div>
 
             <EventTable data={events} startDate={startDate} />
           </div>
