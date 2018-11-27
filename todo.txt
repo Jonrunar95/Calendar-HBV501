@@ -1,6 +1,4 @@
-Laga calendar view "CSS"
-Laga Link fyrir event á calendar
 Almennt CSS
-
+Ef event er styttri en klukkutími sets titillinn ekki í Calendar
 
 

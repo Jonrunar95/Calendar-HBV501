@@ -27,7 +27,6 @@ class EventTable extends Component {
         
         return (
           e.getHours() === i
-
         );
       });
 
