@@ -12,6 +12,10 @@
     width: 20%;
 }
 
+.navButtons{
+    display: flex;
+}
+
 .Button {
     margin: 0.2rem 1rem;
     padding-left: 0.5em;
@@ -30,6 +34,7 @@
 }
 
 .logo{
+    margin-left: 1em;
     font-weight: bold;
     width: 11em;
     text-align: right;
@@ -38,3 +43,4 @@
     background-size: 20px 20px;
     color: rgba(77, 76, 76, 0.897);
 }
+

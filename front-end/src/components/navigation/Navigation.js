@@ -30,7 +30,10 @@ export default class Navigation extends Component {
     const {isAuthenticated } = this.state
     if(isAuthenticated) {
       return (
-      <nav className="nav-bar">
+      <nav className="nav-bar">  
+        <div className='logo'>
+          Executive Scheduler
+        </div>
         <div className='Button'>
           <Link className = "button-link" to='/logout'> Logout </Link>
         </div>
@@ -42,7 +45,10 @@ export default class Navigation extends Component {
       )
     } else {
       return (
-        <nav className="nav-bar">
+        <nav className="nav-bar"> 
+          <div className='logo'>
+          Executive Scheduler
+          </div> 
           <div className='Button'>
             <Link className = "button-link" to='/login'> Login </Link>
           </div>
@@ -50,7 +56,7 @@ export default class Navigation extends Component {
             <Link className = "button-link" to='/register'> Register </Link>
           </div>
         </nav>
-      )
+      );
     }
   }
 
@@ -63,4 +69,4 @@ export default class Navigation extends Component {
       </div>
     );
   }
-}
+}   
