@@ -89,19 +89,16 @@ class Calendar extends Component {
 
     return (
         <div className = 'main'>
-          <Link className = "button-Create" to='event/new'>Create new event</Link>
-          <div>
-            <div className='calendar-buttons'>
+          <div className = 'takkar'>
               <button className = "calendar-Button button-left" onClick={this.prevPage}></button>
+              <Link className = "button-Create" to='event/new'>Create new event</Link>
               <button className = "calendar-Button button-right" onClick={this.nextPage}></button>
+            
+          </div>
+            <div>
+              <EventTable data={events} startDate={startDate} />
             </div>
-
-            <EventTable data={events} startDate={startDate} />
-          </div>
-          <div>
-
-          </div>
-        </div>
+      </div>
     );
   }
 }
