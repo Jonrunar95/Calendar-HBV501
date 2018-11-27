@@ -112,8 +112,8 @@ class Calendar extends Component {
     const { data: events } = data;
 
     return (
-        <div>
-          <Link className = "button-link" to='event/new'>Create new event</Link>
+        <div className = 'main'>
+          <Link className = "button-Create" to='event/new'>Create new event</Link>
           <div>
             <button className = "calendar-Button button-left" onClick={this.prevPage}></button>
             <button className = "calendar-Button button-right" onClick={this.nextPage}></button>
