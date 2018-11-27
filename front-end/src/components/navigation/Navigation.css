@@ -13,13 +13,14 @@
 }
 
 .Button {
-    margin-right: 1em;
-    margin-left: 1em;
+    margin: 0.2rem 1rem;
     padding-left: 0.5em;
     padding-right: 0.5em;
     text-decoration-line: none;
     background-color: rgb(212, 189, 255);
     border-radius: 1rem;
+    width: auto;
+    text-align: center;
 }
 
 .button-link{

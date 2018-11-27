@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import api from '../../api.js';
-import { Redirect } from 'react-router-dom';
-import '../../routes/login/Login.css';
+import { Redirect, Link } from 'react-router-dom';
+import './eventCreate.css';
+
 
 
 class EventCreate extends Component {
@@ -133,7 +134,7 @@ class EventCreate extends Component {
     }
 
     return (
-      <div className='login-box'>
+      <div className='login-box createEvent-box'>
         <h2 className="margin_div"> {pageTitle} </h2>
         <div className="change_div">
           <p> {error} </p>
@@ -144,7 +145,7 @@ class EventCreate extends Component {
                   Start date:
                 </div>
                 <div>
-                  <input className="input username" type='datetime-local' value={startDate} onChange={this.changeStartDate}/>
+                  <input className='input' type='datetime-local' value={startDate} onChange={this.changeStartDate}/>
                 </div>
               </label>
             </div>
@@ -154,7 +155,7 @@ class EventCreate extends Component {
                   End date:
                 </div>
                 <div>
-                  <input className="book_edit_input" type='datetime-local' value={endDate} onChange={this.changeEndDate}/>
+                  <input className='input' type='datetime-local' value={endDate} onChange={this.changeEndDate}/>
                 </div>
               </label>
             </div>
@@ -164,7 +165,7 @@ class EventCreate extends Component {
                   Title:
                 </div>
                 <div>
-                  <input className="book_edit_desc" type='text' value={title} onChange={this.changeTitle}/>
+                  <input className='input' type='text' value={title} placeholder='Title' onChange={this.changeTitle}/>
                 </div>
               </label>
             </div>
@@ -176,16 +177,20 @@ class EventCreate extends Component {
                   Description:
                 </div>
                 <div>
-                  <textarea className="book_edit_input" value={description} onChange={this.changeDescription}/>
+                  <textarea className='input' value={description} placeholder='Description' onChange={this.changeDescription}/>
                 </div>
               </label>
             </div>
-            <div>
-              <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
-              <input className='submit' type='submit' value='Delete' onClick={this.handleDelete}></input>
-
+            <div className='submit-container'>
+              <input className='Button' type='submit' value='Submit' onClick={this.handleSubmit}></input>
+              <input className='Button' type='submit' value='Delete' onClick={this.handleDelete}></input>
             </div>
           </form>
+          <div className='link-box'>
+            <div className='Button'>
+              <Link to={'/calendar'} className='button-link'> Back </Link>
+            </div>
+          </div>
         </div>
       </div>
     );
