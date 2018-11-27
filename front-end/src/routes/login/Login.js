@@ -85,7 +85,7 @@ class Login extends Component {
                 Password:
               </div>
               <div>
-                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
+                <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
               </div>
             </label>
           </div>

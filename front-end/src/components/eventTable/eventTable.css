@@ -33,7 +33,7 @@
   font-weight: bold;
   font-size: small;
   /* Hakk kannski betra að staðsetja rétt í react */
-  right:1px;
+  right:0.5px;
 }
 
 .tableEvent:hover {
@@ -43,15 +43,4 @@
 
 .calendar{
   margin: auto;
-}
-
-.calendar-Button{
-  margin-left: 33%;
-  text-decoration-line: none;
-  background-color: rgb(212, 189, 255);
-  border: none;
-  border-radius: 1rem;
-  color: rgba(77, 76, 76, 0.897);
-  font-weight: bold;
-
 }
