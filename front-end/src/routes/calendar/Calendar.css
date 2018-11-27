@@ -1,5 +1,13 @@
+.calendar-buttons {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  max-width: 25rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
 .calendar-Button{
-  margin-left: 33%;
   text-decoration-line: none;
   background-color: rgb(212, 189, 255);
   border: none;
@@ -20,7 +28,8 @@
 }
 
 .button-Create {
-    margin-left: 1.5%;
+    margin: auto;
+    min-width: 25rem;
     text-decoration-line: none;
     background-color: rgb(212, 189, 255);
     border: none;

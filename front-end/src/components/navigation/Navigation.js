@@ -46,7 +46,7 @@ export default class Navigation extends Component {
       )
     } else {
       return (
-        <nav className="nav-bar"> 
+        <nav className="nav-bar">
         <div className='logo'/>
           <div className='Button'>
             <Link className = "button-link" to='/'> Executive Scheduler </Link>
@@ -63,12 +63,10 @@ export default class Navigation extends Component {
   }
 
   render() {
-    console.log(this.props.isAuthenticated)
-
     return (
       <div>
         {this.loggedInButton()}
       </div>
     );
   }
-}   
+}

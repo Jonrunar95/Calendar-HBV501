@@ -11,11 +11,9 @@ class EventCreate extends Component {
 
     const { data } = props;
 
-    console.log(data);
-
     const today = new Date();
-    const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${props.hour}`;
-    const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${props.hour+1}`;
+    const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T00:00`;
+    const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T01:00`;
 
     if (data) {
       this.state = {
@@ -120,6 +118,8 @@ class EventCreate extends Component {
       data,
       deleted,
     } = this.state
+
+    console.log(startDate);
 
     if (deleted) {
       return (
