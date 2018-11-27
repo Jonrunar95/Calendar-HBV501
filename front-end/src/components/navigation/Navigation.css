@@ -17,7 +17,7 @@
 }
 
 .Button {
-    margin: 0.2rem 1rem;
+    margin: 0.2rem 0.5rem;
     padding-left: 0.5em;
     padding-right: 0.5em;
     text-decoration-line: none;
@@ -35,7 +35,7 @@
 
 .logo{
     font-weight: bold;
-    width: 11em;
+    width: 2em;
     text-align: right;
     background-image: url("lion.png");
     background-repeat: no-repeat;
