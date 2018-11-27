@@ -119,7 +119,7 @@ class CreateUser extends Component {
                   Password:
                 </div>
                 <div>
-                  <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
+                  <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
                 </div>
               </label>
             </div>
@@ -131,7 +131,7 @@ class CreateUser extends Component {
                   Password again:
                 </div>
                 <div>
-                  <input className="book_edit_input" type='text' value={password2} onChange={this.changePassword2}/>
+                  <input className="book_edit_input" type='password' value={password2} onChange={this.changePassword2}/>
                 </div>
               </label>
             </div>

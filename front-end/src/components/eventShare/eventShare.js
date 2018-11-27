@@ -4,8 +4,24 @@ import api from '../../api.js';
 import UserList from '../UserList';
 
 
-class EventView extends Component {
-  state = { data: null, loading: true, error: false, errorMsg: '' };
+class EventShare extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      username: '',
+      data: null,
+      loading: true,
+      error: false
+    };
+
+    this.changeUsername = this.changeUsername.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  changeUsername(event) {
+    this.setState({username: event.target.value});
+  }
 
   async componentDidMount() {
     const { id } = this.props;
@@ -15,7 +31,7 @@ class EventView extends Component {
       if (status === 200) {
         this.setState({ data: data, loading: false });
       } else {
-        this.setState({ loading: false, errorMsg: data.message });
+        this.setState({ loading: false });
       }
     }
     catch (e) {
@@ -24,16 +40,35 @@ class EventView extends Component {
     }
   }
 
+  async handleSubmit(event) {
+    event.preventDefault();
+    const { username } = this.state;
+
+    const data = [ username ];
+
+    const { id } = this.props;
+
+    console.log(data);
+
+    const response = await api.post(`/event/${id}/users`, data);
+
+    const { status } = response;
+    if(status === 200) {
+      const { data } = response;
+      this.setState({ data });
+      console.log(data);
+    } else {
+      this.setState({ error: true });
+    }
+  }
 
   render(){
     const {
       data,
       loading,
       error,
-      errorMsg,
+      username,
     } = this.state
-
-    const { id } = this.props;
 
     if (loading) {
       return (
@@ -62,18 +97,19 @@ class EventView extends Component {
 
     return (
       <div>
-        <p> {errorMsg} </p>
         <h3> {title} </h3>
         <p> {startDate} </p>
         <p> {endDate} </p>
         <p> {description} </p>
         <UserList users={users} />
-        <Link to={`/event/${id}/edit`}> Edit Event </Link>
-        <Link to={`/event/${id}/share`}> Share Event </Link>
+        <form method='POST'>
+          <input type='text' placeholder='Username' value={username} onChange={this.changeUsername}/>
+          <input type='submit' value='Share' onClick={this.handleSubmit}/>
+        </form>
         <Link to={'/calendar'}> Back </Link>
       </div>
     );
   }
 }
 
-export default EventView;
+export default EventShare;

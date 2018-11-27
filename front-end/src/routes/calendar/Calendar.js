@@ -4,6 +4,8 @@ import EventTable from '../../components/eventTable';
 import { Link } from 'react-router-dom';
 import querystring from 'querystring';
 
+import './Calendar.css';
+
 
 class Calendar extends Component {
 
