@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api.js';
 import { Redirect } from 'react-router-dom';
-
+import '../../routes/login/Login.css';
 
 
 class EventCreate extends Component {
@@ -133,7 +133,7 @@ class EventCreate extends Component {
     }
 
     return (
-      <div>
+      <div className='login-box'>
         <h2 className="margin_div"> {pageTitle} </h2>
         <div className="change_div">
           <p> {error} </p>
