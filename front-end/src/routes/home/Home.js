@@ -21,6 +21,7 @@ class Home extends Component {
     
     return (
         <div className='Buttons'>
+          <div className = "homeLion"></div>
           <div className='home-button'>
             <Link className='button-link' to='/users'> Users </Link>
           </div>
