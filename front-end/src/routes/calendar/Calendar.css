@@ -7,7 +7,14 @@
   color: rgba(77, 76, 76, 0.897);
   font-weight: bold;
   text-align: center;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   margin-top: 2rem;
   margin-bottom: 1rem;
+}
+
+.button-right {
+  background-image: url('./right.svg');
+}
+.button-left {
+  background-image: url('./left.svg');
 }
