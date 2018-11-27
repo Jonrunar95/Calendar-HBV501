@@ -91,12 +91,12 @@ class Login extends Component {
                 Password:
               </div>
               <div>
-                <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
+                <input className="input" type='password' value={password} onChange={this.changePassword}/>
               </div>
             </label>
           </div>
-          <div>
-            <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
+          <div className='submit-container share-container'>
+            <input className='submit Button' type='submit' value='Submit' onClick={this.handleSubmit}></input>
           </div>
         </form>
       </div>

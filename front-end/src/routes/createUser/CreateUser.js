@@ -113,7 +113,7 @@ class CreateUser extends Component {
                     Name:
                   </div>
                   <div>
-                    <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
+                    <input className="input" type='text' value={name} onChange={this.changeName}/>
                   </div>
                 </label>
               </div>
@@ -123,7 +123,7 @@ class CreateUser extends Component {
                     Password:
                   </div>
                   <div>
-                    <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
+                    <input className="input" type='password' value={password} onChange={this.changePassword}/>
                   </div>
                 </label>
               </div>
@@ -135,12 +135,12 @@ class CreateUser extends Component {
                     Password again:
                   </div>
                   <div>
-                    <input className="book_edit_input" type='password' value={password2} onChange={this.changePassword2}/>
+                    <input className="input" type='password' value={password2} onChange={this.changePassword2}/>
                   </div>
                 </label>
               </div>
-              <div>
-                <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
+              <div className='submit-container share-container'>
+                <input className='Button' type='submit' value='submit' onClick={this.handleSubmit}></input>
               </div>
             </form>
           </div>
