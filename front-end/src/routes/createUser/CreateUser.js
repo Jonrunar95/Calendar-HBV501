@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import api from '../../api.js';
-
+import '../login/Login.css';
 class CreateUser extends Component {
   constructor(props) {
     super(props);
@@ -89,55 +89,57 @@ class CreateUser extends Component {
   return (
     <div>
       {error}
-      <h2 className="margin_div">Create User</h2>
-      <div className="change_div">
-        <form>
-          <div className="margin_div">
-            <label  className="book_edit_label">
-              <div>
-                Username:
-              </div>
-              <div>
-                <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
-              </div>
-            </label>
-          </div>
-          <div className="margin_div">
-            <label className="book_edit_label">
-              <div>
-                Name:
-              </div>
-              <div>
-                <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
-              </div>
-            </label>
-          </div>
-          <div className="margin_div">
-            <label>
-              <div>
-                Password:
-              </div>
-              <div>
-                <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
-              </div>
-            </label>
-          </div>
-          <div className="margin_div">
-          </div>
-          <div className="margin_div">
-            <label className="book_edit_label">
-              <div>
-                Password again:
-              </div>
-              <div>
-                <input className="book_edit_input" type='text' value={password2} onChange={this.changePassword2}/>
-              </div>
-            </label>
-          </div>
-          <div>
-            <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
-          </div>
-        </form>
+        <div className='login-box'>
+        <h2 className="margin_div">Create User</h2>
+        <div className="change_div">
+          <form>
+            <div className="margin_div">
+              <label  className="book_edit_label">
+                <div>
+                  Username:
+                </div>
+                <div>
+                  <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
+                </div>
+              </label>
+            </div>
+            <div className="margin_div">
+              <label className="book_edit_label">
+                <div>
+                  Name:
+                </div>
+                <div>
+                  <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
+                </div>
+              </label>
+            </div>
+            <div className="margin_div">
+              <label>
+                <div>
+                  Password:
+                </div>
+                <div>
+                  <input className="book_edit_desc" type='text' value={password} onChange={this.changePassword}/>
+                </div>
+              </label>
+            </div>
+            <div className="margin_div">
+            </div>
+            <div className="margin_div">
+              <label className="book_edit_label">
+                <div>
+                  Password again:
+                </div>
+                <div>
+                  <input className="book_edit_input" type='text' value={password2} onChange={this.changePassword2}/>
+                </div>
+              </label>
+            </div>
+            <div>
+              <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

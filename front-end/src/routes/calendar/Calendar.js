@@ -112,8 +112,8 @@ class Calendar extends Component {
     return (
         <div>
           <div>
-            <button className = "Button" onClick={this.prevPage}> &lt;- </button>
-            <button className = "Button" onClick={this.nextPage}> -&gt; </button>
+            <button className = "calendar-Button" onClick={this.prevPage}> &lt;- </button>
+            <button className = "calendar-Button" onClick={this.nextPage}> -&gt; </button>
 
             <EventTable data={events} startDate={startDate} />
           </div>

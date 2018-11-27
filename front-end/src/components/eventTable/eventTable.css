@@ -12,7 +12,8 @@
 .tableHeader {
   font-weight: bold;
   background-color: rgba(156, 190, 252, 0.664);
-  border-radius: 10%;
+  border-radius: 1rem;
+  padding: 1em;
 }
 
 .tableHour {
@@ -42,4 +43,11 @@
 
 .calendar{
   margin: auto;
+}
+
+.calendar-Button{
+  margin-left: 33%;
+  text-decoration-line: none;
+  background-color: rgb(212, 189, 255);
+  border: none;
 }

@@ -1,13 +1,22 @@
 .login-box{
     margin: auto;
     margin-top: 2em;
-    width: 30%;
+    width: 15em;
     background-color: rgba(0, 0, 255, 0.178);
     border-radius: 10%;
-    padding-bottom: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding: 1em 1em 1em 0.1em;
     box-shadow: 2px 2px 8px 0px grey;
+}
+
+.margin_div{
+    margin:auto;
+    width: 70%;
+}
+
+.submit{
+    width: 25%;
+    margin-left: 56%;
+    margin-top: 1em;
 }
 
 

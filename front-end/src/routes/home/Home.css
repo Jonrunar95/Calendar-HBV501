@@ -1,0 +1,14 @@
+.Buttons{
+}
+
+.home-button{
+    width: 10em;
+    margin: auto;
+    margin-top: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    text-decoration-line: none;
+    text-align: center;
+    background-color: rgb(212, 189, 255);
+    border-radius: 10%;
+}

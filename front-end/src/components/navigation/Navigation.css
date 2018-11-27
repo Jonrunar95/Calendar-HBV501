@@ -14,15 +14,16 @@
 
 .Button {
     margin-right: 1em;
+    margin-left: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
     text-decoration-line: none;
     background-color: rgb(212, 189, 255);
-    border: none;
     border-radius: 10%;
 }
 
 .button-link{
     text-decoration-line: none;
-    color: black;
+    color: rgba(77, 76, 76, 0.897);
+    font-weight: bold;
 }
