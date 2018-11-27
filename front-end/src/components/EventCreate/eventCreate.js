@@ -14,8 +14,8 @@ class EventCreate extends Component {
     console.log(data);
 
     const today = new Date();
-    const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T00:00`;
-    const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T01:00`;
+    const startValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${props.hour}`;
+    const endValue = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}T${props.hour+1}`;
 
     if (data) {
       this.state = {
