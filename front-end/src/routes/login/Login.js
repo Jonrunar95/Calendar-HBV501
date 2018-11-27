@@ -10,7 +10,7 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-      loggedIn: false,
+      isAuthenticated: this.props.isAuthenticated,
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -45,11 +45,9 @@ class Login extends Component {
     const { status } = response;
     if(status === 200) {
       window.localStorage.setItem('token', response.data.token)
-      this.setState({loggedIn: true})
       console.log(this.props)
-      //const { changeState } = this.props
-      //console.log(changeState)
-      this.props.changeState()
+      const { changeStateLogin } = this.props
+      await changeStateLogin()
     }
   }
 
@@ -58,11 +56,11 @@ class Login extends Component {
     const {
       username,
       password,
-      loggedIn,
     } = this.state
 
+    const { isAuthenticated } = this.props;
 
-    if(loggedIn) {
+    if(isAuthenticated===true)  {
       return (<Redirect to={{pathname: '/calendar', state: {from: this.props.location}}} />)
     }
 

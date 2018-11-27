@@ -21,19 +21,27 @@ class App extends Component {
     this.state = {
       isAuthenticated: false
     };
-    this.changeState = this.changeState.bind(this);
+    this.changeStateLogin = this.changeStateLogin.bind(this);
+    this.changeStateLogout = this.changeStateLogout.bind(this);
   }
 
-  changeState() {
-    const { isAuthenticated } = this.state;
-    this.setState({isAuthenticated: !isAuthenticated})
-    console.log('halló')
+  async componentDidMount() {
+    if(window.localStorage.getItem('token')) {
+      this.setState({isAuthenticated: true})
+    }
   }
 
+  async changeStateLogin() {
+    this.setState({isAuthenticated: true})
+  }
+
+  async changeStateLogout() {
+    this.setState({isAuthenticated: false})
+    window.localStorage.removeItem('token')
+  }
 
   render() {
-    const { isAuthenticated } = this.state;
-    console.log(isAuthenticated)
+    const { isAuthenticated } = this.state
     return (
       <main className="main">
         <div className="Content">
@@ -51,9 +59,12 @@ class App extends Component {
                   <Route exact path='/register' component={CreateUser}/>
                   <Route 
                     path='/login'
-                    render={props => <Login {...props} changeState={(this.changeState)}/>
+                    render={props => <Login {...props} changeStateLogin={(this.changeStateLogin)} isAuthenticated={(isAuthenticated)}/>
                   }/>
-                  <Route exact path='/logout' component={Logout}/>
+                  <Route 
+                    path='/logout'
+                    render={props => <Logout {...props} changeStateLogout={(this.changeStateLogout)}/>
+                  }/>
                 </Switch>
                 <Back/>
               </div>
