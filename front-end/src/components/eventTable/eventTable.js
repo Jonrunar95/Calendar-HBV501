@@ -6,9 +6,9 @@ class EventTable extends Component {
 
   constructor(props) {
     super(props);
-    const { data, view } = props;
+    const { data} = props;
 
-    this.state = { data, view };
+    this.state = { data };
   }
 
   weekViewTable() {
@@ -24,8 +24,10 @@ class EventTable extends Component {
     for (let i = 0; i < 24; i++) {
       const byHour = data.filter(event => {
         const e = new Date(event.startDate);
+        
         return (
           e.getHours() === i
+
         );
       });
 

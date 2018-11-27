@@ -133,6 +133,8 @@ class EventCreate extends Component {
         return (<Redirect to={{pathname: `/event/${data.id}`, state: {from: this.props.location}}} />)
     }
 
+    const { url } = this.props
+
     return (
       <div className='login-box createEvent-box'>
         <h2 className="margin_div"> {pageTitle} </h2>
@@ -188,7 +190,7 @@ class EventCreate extends Component {
           </form>
           <div className='link-box'>
             <div className='Button'>
-              <Link to={'/calendar'} className='button-link'> Back </Link>
+              <Link to={url} className='button-link'> Back </Link>
             </div>
           </div>
         </div>

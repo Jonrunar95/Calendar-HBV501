@@ -110,6 +110,8 @@ class EventShare extends Component {
     const startDate = this.parseDate(startDateString);
     const endDate = this.parseDate(endDateString);
 
+    const { url } = this.props
+
 
     return (
       <div className='view-box'>
@@ -126,7 +128,7 @@ class EventShare extends Component {
         </form>
         <div className='link-box'>
           <div className='Button'>
-            <Link to={'/calendar'} className='button-link'> Back </Link>
+            <Link to={url} className='button-link'> Back </Link>
           </div>
         </div>
       </div>
