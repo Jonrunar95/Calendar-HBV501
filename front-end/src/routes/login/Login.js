@@ -10,12 +10,8 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
-<<<<<<< HEAD
-      loggedIn: false,
       error: '',
-=======
       isAuthenticated: this.props.isAuthenticated,
->>>>>>> d9cdfc5a4cbb97d414d3d0ebd76d91285f06ac81
     };
 
     this.changeUsername = this.changeUsername.bind(this);
