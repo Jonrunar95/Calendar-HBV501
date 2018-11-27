@@ -44,28 +44,30 @@ class App extends Component {
     const { isAuthenticated } = this.state
     return (
       <main className="main">
-        <div className="Content">
+        <div>
           <section>
             <BrowserRouter>
               <div>
                 <Navigation isAuthenticated={isAuthenticated}/>
-                <Switch>
-                  <Route path="/" exact component={Home} />
-                  <Route exact path='/event/new' component={CreateEvent}/>
-                  <Route exact path='/event/:id/edit' component={UpdateEvent}/>
-                  <Route exact path='/event/:id' component={ViewEvent}/>
-                  <Route exact path='/event/:id/share' component={ShareEvent}/>
-                  <Route exact path="/Calendar" component={Calendar} />
-                  <Route exact path='/register' component={CreateUser}/>
-                  <Route
-                    path='/login'
-                    render={props => <Login {...props} changeStateLogin={(this.changeStateLogin)} isAuthenticated={(isAuthenticated)}/>
+                <div className='content'>
+                  <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route exact path='/event/new' component={CreateEvent}/>
+                    <Route exact path='/event/:id/edit' component={UpdateEvent}/>
+                    <Route exact path='/event/:id' component={ViewEvent}/>
+                    <Route exact path='/event/:id/share' component={ShareEvent}/>
+                    <Route exact path="/Calendar" component={Calendar} />
+                    <Route exact path='/register' component={CreateUser}/>
+                    <Route
+                      path='/login'
+                      render={props => <Login {...props} changeStateLogin={(this.changeStateLogin)} isAuthenticated={(isAuthenticated)}/>
                   }/>
-                  <Route 
+                  <Route
                     path='/logout'
                     render={props => <Logout {...props} changeStateLogout={(this.changeStateLogout)}/>
-                  }/>
-                </Switch>
+                }/>
+              </Switch>
+                </div>
               </div>
             </BrowserRouter>
 
