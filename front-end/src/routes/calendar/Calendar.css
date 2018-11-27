@@ -18,3 +18,21 @@
 .button-left {
   background-image: url('./left.svg');
 }
+
+.button-Create {
+    margin-left: 1.5%;
+    text-decoration-line: none;
+    background-color: rgb(212, 189, 255);
+    border: none;
+    border-radius: 1rem;
+    color: rgba(77, 76, 76, 0.897);
+    font-weight: bold;
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,6 +1,5 @@
 Laga calendar view "CSS"
 Laga Link fyrir event á calendar
-Laga redirect á login þegar not authenticated
 Almennt CSS
 
 

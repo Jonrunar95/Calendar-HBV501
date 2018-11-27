@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './Home.css';
 class Home extends Component {
   constructor(props) {
@@ -28,6 +27,7 @@ class Home extends Component {
           <div className='home-button'>
             <Link className='button-link' to='/register'> Register</Link>
           </div>
+
         </div>
     );
   }
