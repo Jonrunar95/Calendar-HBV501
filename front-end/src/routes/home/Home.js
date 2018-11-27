@@ -20,7 +20,7 @@ class Home extends Component {
     
     return (
         <div className='Buttons'>
-
+          <div className = "homeLion"></div>
         </div>
     );
   }

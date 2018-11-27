@@ -1,4 +1,9 @@
-.Buttons{
+.homeLion{
+    width: 20em;
+    height: 20em;
+    margin: auto;
+    background-image: url("goldenLion.png");
+    background-size: 20em 20em;
 }
 
 .home-button{
