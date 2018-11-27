@@ -10,8 +10,12 @@ class Login extends Component {
     this.state = {
       username: '',
       password: '',
+<<<<<<< HEAD
       loggedIn: false,
       error: '',
+=======
+      isAuthenticated: this.props.isAuthenticated,
+>>>>>>> d9cdfc5a4cbb97d414d3d0ebd76d91285f06ac81
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -46,11 +50,9 @@ class Login extends Component {
     const { status } = response;
     if(status === 200) {
       window.localStorage.setItem('token', response.data.token)
-      this.setState({loggedIn: true})
       console.log(this.props)
-      //const { changeState } = this.props
-      //console.log(changeState)
-      this.props.changeState()
+      const { changeStateLogin } = this.props
+      await changeStateLogin()
     } else if (status === 400) {
       const { data } = response;
       this.setState({ error: data.message });
@@ -62,12 +64,12 @@ class Login extends Component {
     const {
       username,
       password,
-      loggedIn,
       error,
     } = this.state
 
+    const { isAuthenticated } = this.props;
 
-    if(loggedIn) {
+    if(isAuthenticated===true)  {
       return (<Redirect to={{pathname: '/calendar', state: {from: this.props.location}}} />)
     }
 

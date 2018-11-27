@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import api from '../../api';
 import EventTable from '../../components/eventTable';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import querystring from 'querystring';
 
 import './Calendar.css';
@@ -105,7 +105,7 @@ class Calendar extends Component {
     }
 
     if (error) {
-      return (<div>Villa við að sækja gögn</div>);
+      return (<Redirect to={{pathname: '/login', state: {from: this.props.location}}} />);
     }
 
 
