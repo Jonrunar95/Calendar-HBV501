@@ -22,7 +22,7 @@ export default class Navigation extends Component {
   }
 
   handleLogout() {
-    
+
   }
 
 
@@ -30,19 +30,19 @@ export default class Navigation extends Component {
     const {isAuthenticated } = this.state
     if(isAuthenticated) {
       return (
-      <nav className="nav-bar">  
+      <nav className="nav-bar">
         <div className='Button'>
           <Link className = "button-link" to='/logout'> Logout </Link>
         </div>
         <div className='Button'>
           <Link className = "button-link" to='/calendar'>Calendar </Link>
         </div>
-        
+
       </nav>
       )
     } else {
       return (
-        <nav className="nav-bar">  
+        <nav className="nav-bar">
           <div className='Button'>
             <Link className = "button-link" to='/login'> Login </Link>
           </div>
@@ -58,24 +58,9 @@ export default class Navigation extends Component {
     console.log(this.props.isAuthenticated)
 
     return (
-<<<<<<< Updated upstream
       <div>
         {this.loggedInButton()}
       </div>
-
-=======
-      <nav className="nav-bar">
-        <div className='logo'>
-          Executive Scheduler
-        </div>
-        <div className='Button'>
-          {this.loggedInButton()}
-        </div>
-        <div className='Button'>
-          <Link className = "button-link" to='/calendar'>Calendar </Link>
-        </div>
-      </nav>
->>>>>>> Stashed changes
     );
   }
 }
