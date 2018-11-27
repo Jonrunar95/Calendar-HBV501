@@ -12,6 +12,10 @@
     width: 20%;
 }
 
+.navButtons{
+    display: flex;
+}
+
 .Button {
     margin-right: 1em;
     margin-left: 1em;
@@ -37,3 +41,4 @@
     background-size: 20px 20px;
     color: rgba(77, 76, 76, 0.897);
 }
+
