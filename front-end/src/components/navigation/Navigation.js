@@ -22,7 +22,7 @@ export default class Navigation extends Component {
   }
 
   handleLogout() {
-    
+
   }
 
 
@@ -40,7 +40,7 @@ export default class Navigation extends Component {
         <div className='Button'>
           <Link className = "button-link" to='/calendar'>Calendar </Link>
         </div>
-        
+
       </nav>
       )
     } else {
@@ -56,7 +56,7 @@ export default class Navigation extends Component {
             <Link className = "button-link" to='/register'> Register </Link>
           </div>
         </nav>
-      )
+      );
     }
   }
 
@@ -64,9 +64,9 @@ export default class Navigation extends Component {
     console.log(this.props.isAuthenticated)
 
     return (
-        <div>
-          {this.loggedInButton()}
-        </div>
+      <div>
+        {this.loggedInButton()}
+      </div>
     );
   }
-}
+}   

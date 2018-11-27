@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import api from '../../api.js';
 import UserList from '../UserList';
 
+import './eventShare.css';
+
 
 class EventShare extends Component {
   constructor(props) {
@@ -62,6 +64,17 @@ class EventShare extends Component {
     }
   }
 
+  parseDate(string) {
+    const date = new Date(string);
+
+    let parsed = `${date.toDateString()} `;
+
+    parsed += date.getHours() < 10 ? `0${date.getHours()}` : `${date.getHours()}`;
+    parsed += date.getMinutes() < 10 ? `:0${date.getMinutes()}` : `:${date.getMinutes()}`;
+
+    return parsed;
+  }
+
   render(){
     const {
       data,
@@ -87,26 +100,35 @@ class EventShare extends Component {
     }
 
     const {
-      startDate,
-      endDate,
+      startDate: startDateString,
+      endDate: endDateString,
       title,
       description,
       users,
     } = data;
 
+    const startDate = this.parseDate(startDateString);
+    const endDate = this.parseDate(endDateString);
+
 
     return (
-      <div>
+      <div className='view-box'>
         <h3> {title} </h3>
         <p> {startDate} </p>
         <p> {endDate} </p>
         <p> {description} </p>
         <UserList users={users} />
         <form method='POST'>
-          <input type='text' placeholder='Username' value={username} onChange={this.changeUsername}/>
-          <input type='submit' value='Share' onClick={this.handleSubmit}/>
+          <input className='input' type='text' placeholder='Username' value={username} onChange={this.changeUsername}/>
+          <div className='submit-container share-container'>
+            <input className='Button' type='submit' value='Share' onClick={this.handleSubmit}/>
+          </div>
         </form>
-        <Link to={'/calendar'}> Back </Link>
+        <div className='link-box'>
+          <div className='Button'>
+            <Link to={'/calendar'} className='button-link'> Back </Link>
+          </div>
+        </div>
       </div>
     );
   }

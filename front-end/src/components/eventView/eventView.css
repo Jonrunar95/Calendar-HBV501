@@ -1,0 +1,14 @@
+.view-box{
+    margin: auto;
+    margin-top: 2em;
+    width: 15em;
+    background-color: rgba(0, 0, 255, 0.178);
+    border-radius: 10%;
+    padding: 2em 2em 2em 2em;
+    box-shadow: 2px 2px 8px 0px grey;
+}
+
+.link-box {
+  display: flex;
+  flex-direction: column;
+}

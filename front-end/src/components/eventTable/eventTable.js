@@ -15,7 +15,7 @@ class EventTable extends Component {
     const { data } = this.state;
     const { startDate } = this.props;
 
-    const today = new Date();
+    const today = new Date(startDate);
     const weekDay = today.getDay();
     const millisDay = 24 * 60 * 60 * 1000;
 
