@@ -11,6 +11,7 @@ class Login extends Component {
       username: '',
       password: '',
       loggedIn: false,
+      error: '',
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -50,6 +51,9 @@ class Login extends Component {
       //const { changeState } = this.props
       //console.log(changeState)
       this.props.changeState()
+    } else if (status === 400) {
+      const { data } = response;
+      this.setState({ error: data.message });
     }
   }
 
@@ -59,6 +63,7 @@ class Login extends Component {
       username,
       password,
       loggedIn,
+      error,
     } = this.state
 
 
@@ -70,6 +75,7 @@ class Login extends Component {
     <div className = "login-box">
       <h2 className="margin_div">Login</h2>
       <div className="change_div">
+        <p> {error} </p>
         <form>
           <div className="margin_div">
             <label  className="book_edit_label">

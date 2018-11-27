@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import api from '../../api.js';
 import '../login/Login.css';
 class CreateUser extends Component {
@@ -9,7 +10,9 @@ class CreateUser extends Component {
       name: '',
       password: '',
       password2: '',
-      samePassword: true
+      samePassword: true,
+      error: '',
+      success: false,
     };
 
     this.changeUsername = this.changeUsername.bind(this);
@@ -18,7 +21,6 @@ class CreateUser extends Component {
     this.changePassword2 = this.changePassword2.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onClick = this.onClick.bind(this);
-    this.checkPassword = this.checkPassword.bind(this);
   }
 
   changeUsername(event) {
@@ -40,38 +42,36 @@ class CreateUser extends Component {
       username,
       name,
       password,
-      password2
-  } = this.state;
+      password2,
+    } = this.state;
 
-  if(password !== password2) {
-    this.setState({ samePassword: false })
-  }
+    if(password !== password2) {
+      this.setState({ error: 'Passwords don\'t match!' });
+    }
 
-  else {
-    this.setState({ samePassword: true })
-    const data = {
-      name,
-      username,
-      password,
-    };
+    else {
+      this.setState({ samePassword: true })
+      const data = {
+        name,
+        username,
+        password,
+      };
 
-    const response = await api.post('/register', data);
+      const response = await api.post('/register', data);
 
-    console.log(response);
+      const { status } = response;
 
+      if (status === 200) {
+        this.setState({ success: true });
+      } else if (status === 400) {
+        const { data } = response;
+        this.setState({ error: data.message });
+      }
     }
   }
 
   onClick() {
     this.props.history.push('/books');
-  }
-
-  checkPassword = () => {
-    const { samePassword } = this.state
-    if (samePassword === false) {
-      return (<p>Ekki sama password</p>);
-    }
-    return <p></p>
   }
 
   render(){
@@ -81,68 +81,72 @@ class CreateUser extends Component {
       name,
       password,
       password2,
-      samePassword
+      error,
+      success,
     } = this.state
-    const error = this.checkPassword();
 
-    console.log(samePassword)
-  return (
-    <div>
-      {error}
+
+    if (success) {
+      return (<Redirect to={{pathname: `/login`, state: {from: this.props.location}}} />);
+    }
+
+    return (
+      <div>
         <div className='login-box'>
-        <h2 className="margin_div">Create User</h2>
-        <div className="change_div">
-          <form>
-            <div className="margin_div">
-              <label  className="book_edit_label">
-                <div>
-                  Username:
-                </div>
-                <div>
-                  <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
-                </div>
-              </label>
-            </div>
-            <div className="margin_div">
-              <label className="book_edit_label">
-                <div>
-                  Name:
-                </div>
-                <div>
-                  <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
-                </div>
-              </label>
-            </div>
-            <div className="margin_div">
-              <label>
-                <div>
-                  Password:
-                </div>
-                <div>
-                  <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
-                </div>
-              </label>
-            </div>
-            <div className="margin_div">
-            </div>
-            <div className="margin_div">
-              <label className="book_edit_label">
-                <div>
-                  Password again:
-                </div>
-                <div>
-                  <input className="book_edit_input" type='password' value={password2} onChange={this.changePassword2}/>
-                </div>
-              </label>
-            </div>
-            <div>
-              <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
-            </div>
-          </form>
+          <h2 className="margin_div">Create User</h2>
+          <div className="change_div">
+            <p> {error} </p>
+            <form>
+              <div className="margin_div">
+                <label  className="book_edit_label">
+                  <div>
+                    Username:
+                  </div>
+                  <div>
+                    <input className="input username" type='text' value={username} onChange={this.changeUsername}/>
+                  </div>
+                </label>
+              </div>
+              <div className="margin_div">
+                <label className="book_edit_label">
+                  <div>
+                    Name:
+                  </div>
+                  <div>
+                    <input className="book_edit_input" type='text' value={name} onChange={this.changeName}/>
+                  </div>
+                </label>
+              </div>
+              <div className="margin_div">
+                <label>
+                  <div>
+                    Password:
+                  </div>
+                  <div>
+                    <input className="book_edit_desc" type='password' value={password} onChange={this.changePassword}/>
+                  </div>
+                </label>
+              </div>
+              <div className="margin_div">
+              </div>
+              <div className="margin_div">
+                <label className="book_edit_label">
+                  <div>
+                    Password again:
+                  </div>
+                  <div>
+                    <input className="book_edit_input" type='password' value={password2} onChange={this.changePassword2}/>
+                  </div>
+                </label>
+              </div>
+              <div>
+                <input className='submit' type='submit' value='submit' onClick={this.handleSubmit}></input>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
   }
 }
 
