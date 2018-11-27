@@ -27,7 +27,7 @@ class Home extends Component {
           Our product has Real time updates to visual calendars, which is unheard of in today's main- stream scheduling market.</div>
 
         </div>
-      </div>
+
     );
   }
 }
