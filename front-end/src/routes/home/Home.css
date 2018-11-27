@@ -18,10 +18,18 @@
     border-radius: 1rem;
 }
 
-.Lion {
-  margin-top: 4rem;
+.Vision{
+    width: 40em;
+    margin: auto;
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
-.Vision {
-  margin-top: 2rem;
+.Lion{
+    margin: auto;
+    margin-top: 2em;
+    padding: 2em;
+    width: 50em;
+    border-radius: 1rem;
+    box-shadow: 2px 2px 8px 0px grey;
 }
