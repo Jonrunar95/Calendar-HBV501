@@ -2,6 +2,7 @@
     margin: auto;
     margin-top: 2em;
     width: 15em;
+    word-wrap: break-word;
     background-color: rgba(0, 0, 255, 0.178);
     border-radius: 10%;
     padding: 2em 2em 2em 2em;
