@@ -25,6 +25,7 @@ class EventCreate extends Component {
         error: '',
         data: null,
         deleted: false,
+        editing: true,
       };
     } else {
       this.state = {
@@ -36,6 +37,7 @@ class EventCreate extends Component {
         error: '',
         data: null,
         deleted: false,
+        editing: false,
       };
     }
 
@@ -106,6 +108,25 @@ class EventCreate extends Component {
     }
   }
 
+  submitButtons() {
+    const { editing } = this.state;
+
+    if (editing) {
+      return (
+        <div className='submit-container'>
+        <input className='Button' type='submit' value='Delete' onClick={this.handleDelete} />
+        <input className='Button' type='submit' value='Submit' onClick={this.handleSubmit} />
+        </div>
+      )
+    } else {
+      return (
+        <div className='submit-container share-container'>
+          <input className='Button' type='submit' value='Submit' onClick={this.handleSubmit} />
+        </div>
+      )
+    }
+  }
+
 
   render(){
 
@@ -117,9 +138,8 @@ class EventCreate extends Component {
       error,
       data,
       deleted,
+      editing,
     } = this.state
-
-    console.log(startDate);
 
     if (deleted) {
       return (
@@ -133,10 +153,12 @@ class EventCreate extends Component {
         return (<Redirect to={{pathname: `/event/${data.id}`, state: {from: this.props.location}}} />)
     }
 
-    const { url } = this.props
+    let { url } = this.props;
+
+    url = editing ? url : '/calendar';
 
     return (
-      <div className='login-box createEvent-box'>
+      <div className='view-box viewEvent-box'>
         <h2 className="margin_div"> {pageTitle} </h2>
         <div className="change_div">
           <p> {error} </p>
@@ -183,15 +205,10 @@ class EventCreate extends Component {
                 </div>
               </label>
             </div>
-            <div className='submit-container'>
-              <input className='Button' type='submit' value='Submit' onClick={this.handleSubmit}></input>
-              <input className='Button' type='submit' value='Delete' onClick={this.handleDelete}></input>
-            </div>
+            {this.submitButtons()}
           </form>
           <div className='link-box'>
-            <div className='Button'>
-              <Link to={url} className='button-link'> Back </Link>
-            </div>
+            <Link to={url} className='button-link Button'> Back </Link>
           </div>
         </div>
       </div>

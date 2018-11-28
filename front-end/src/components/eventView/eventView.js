@@ -77,7 +77,7 @@ class EventView extends Component {
     const endDate = this.parseDate(endDateString);
 
     return (
-      <div className='view-box'>
+      <div className='view-box viewEvent-box'>
         <p> {errorMsg} </p>
         <h3> {title} </h3>
         <p> {startDate} </p>
@@ -85,15 +85,9 @@ class EventView extends Component {
         <p> {description} </p>
         <UserList users={users} />
         <div className='link-box'>
-          <div className='Button'>
-            <Link to={`/event/${id}/edit`} className='button-link'> Edit Event </Link>
-          </div>
-          <div className='Button'>
-            <Link to={`/event/${id}/share`} className='button-link'> Share Event </Link>
-          </div>
-          <div className='Button'>
-            <Link to={'/calendar'} className='button-link'> Back </Link>
-          </div>
+          <Link to={`/event/${id}/edit`} className='Button button-link'> Edit Event </Link>
+          <Link to={`/event/${id}/share`} className='Button button-link'> Share Event </Link>
+          <Link to={'/calendar'} className='Button button-link'> Back </Link>
         </div>
       </div>
     );

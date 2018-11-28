@@ -114,7 +114,7 @@ class EventShare extends Component {
 
 
     return (
-      <div className='view-box'>
+      <div className='view-box viewEvent-box'>
         <h3> {title} </h3>
         <p> {startDate} </p>
         <p> {endDate} </p>
@@ -127,9 +127,9 @@ class EventShare extends Component {
           </div>
         </form>
         <div className='link-box'>
-          <div className='Button'>
-            <Link to={url} className='button-link'> Back </Link>
-          </div>
+          <Link to={url} className='button-link Button'>
+            Back
+          </Link>
         </div>
       </div>
     );
