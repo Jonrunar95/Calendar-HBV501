@@ -51,6 +51,8 @@ public class LoginController {
                     "nested exception is org.hibernate.exception.ConstraintViolationException: " +
                     "could not execute statement")) {
                 throw new BadRequestException("Password cannot be empty");
+            } else if (e.getMessage().equals("Username can only contain [a-z A-Z 0-9 _ -]")) {
+                throw new BadRequestException(e.getMessage());
             }
             throw e;
         }

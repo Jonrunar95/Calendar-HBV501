@@ -3,12 +3,14 @@ package project.service.Implementation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import project.controller.exceptions.BadRequestException;
 import project.persistence.entities.Event;
 import project.persistence.entities.User;
 import project.persistence.repositories.UserRepository;
 import project.service.UserService;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class UserServiceImplementation implements UserService {
@@ -24,8 +26,13 @@ public class UserServiceImplementation implements UserService {
     }
 
     @Override
-    public User save(User user) {
+    public User save(User user) throws BadRequestException {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        if (!Pattern.matches("[a-z0-9_-]+", user.getUsername())) {
+            throw new BadRequestException("Username can only contain [a-z A-Z 0-9 _ -]");
+        }
+
         return cleanUser(userRepository.save(user));
     }
 
