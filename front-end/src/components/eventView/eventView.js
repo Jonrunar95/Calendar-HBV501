@@ -17,7 +17,7 @@ class EventView extends Component {
       if (status === 200) {
         this.setState({ data: data, loading: false });
       } else {
-        this.setState({ loading: false, errorMsg: data.message });
+        this.setState({ loading: false, error: true, errorMsg: data.message });
       }
     }
     catch (e) {
