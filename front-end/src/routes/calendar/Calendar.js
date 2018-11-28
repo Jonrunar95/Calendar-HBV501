@@ -81,7 +81,7 @@ class Calendar extends Component {
     }
 
     if (error) {
-      return (<Redirect to={{pathname: '/login', state: {from: this.props.location}}} />);
+      return (<Redirect to={{pathname: '/logout', state: {from: this.props.location}}} />);
     }
 
 
@@ -93,7 +93,7 @@ class Calendar extends Component {
               <button className = "calendar-Button button-left" onClick={this.prevPage}></button>
               <Link className = "button-Create" to='event/new'>Create new event</Link>
               <button className = "calendar-Button button-right" onClick={this.nextPage}></button>
-            
+
           </div>
             <div>
               <EventTable data={events} startDate={startDate} />
