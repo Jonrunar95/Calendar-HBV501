@@ -128,7 +128,7 @@ class EventTable extends Component {
                         };
                         return (
                             <Link key={event.id} className='tableEvent' style={style} to={`/event/${event.id}`}>
-                                {millis > 1000 * 60 * 60 && event.title}
+                                {millis >= 1000 * 60 * 60 && event.title}
                              </Link>
                         );
                       })}

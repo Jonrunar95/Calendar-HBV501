@@ -97,6 +97,11 @@ class EventCreate extends Component {
       description,
     };
 
+    if((data.endDate - data.startDate) < 0) {
+      this.setState({error: 'Start date must be before end date!'})
+      return;
+    } 
+
     const response = await api.post(url, data);
 
     const { status } = response;
