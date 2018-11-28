@@ -24,7 +24,7 @@ class EventTable extends Component {
     for (let i = 0; i < 24; i++) {
       const byHour = data.filter(event => {
         const e = new Date(event.startDate);
-        
+
         return (
           e.getHours() === i
         );
@@ -124,10 +124,11 @@ class EventTable extends Component {
                         const style = {
                           height: (millis/(1000*60*60))*28.8,
                           top: (minutes / 60)*30,
+                          zIndex: Math.floor(1000*60*60*24/millis),
                         };
                         return (
                             <Link key={event.id} className='tableEvent' style={style} to={`/event/${event.id}`}>
-                                {event.title}
+                                {millis > 1000 * 60 * 60 && event.title}
                              </Link>
                         );
                       })}
