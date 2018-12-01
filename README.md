@@ -17,6 +17,7 @@ To get the back-end up and running open up the project in your favorite IDE.  Yo
 * Locate the `application.properties` file in `SpringBootMVC-master/src/main/resources`
 * Input fill in the corresponding fields.  [Username] [Password] etc.
 * Add the `postgresql-42.2.5.jar` file to your project classpath
+* Add the user hbv with pw 1234 and database hbv to postgres
 
 #### HSQL
 
