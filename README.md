@@ -38,3 +38,10 @@ front-end/$ npm start
 ```
 
 The front end server should now be up and running.  Open up your favorite browser and head to localhost:3000.
+
+## Authors
+
+* Atli Marcher Pálsson [atlimp](https://github.com/atlimp) <amp17@hi.is>
+* Haukur Ágústsson [htha13](https://github.com/htha13) <hth13@hi.is>
+* Jón Rúnar Baldvinsson [Jonrunar95](https://github.com/Jonrunar95) <jrb6@hi.is>
+* Pétur Sigurðsson [G10ckm4n](https://github.com/G10ckm4n) <pes14@hi.is>
