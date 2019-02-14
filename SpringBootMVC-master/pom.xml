@@ -41,11 +41,13 @@
         <!--If you wish to connect this application to a PostgreSQL server then add the dependency below but remove the dependency above (the `hsqldb` one) -->
 
 
+        <!-- https://mvnrepository.com/artifact/org.postgresql/postgresql -->
         <dependency>
-            <groupId>postgresql</groupId>
+            <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>42.2.5</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
